@@ -1,6 +1,6 @@
 #/bin/bash
 curl -X POST \
-       https://ggstudio.84-235-173-41.nip.io/services/v2/credentials/OracleGoldenGate/srcCred \
+       https://ggstudio.84-235-173-41.nip.io/services/v2/credentials/OracleGoldenGate/srcConn \
        --user ggadmin:Welcome1234#   \
        --insecure \
        -H 'Cache-Control: no-cache' \
@@ -10,7 +10,7 @@ curl -X POST \
      }'
 
 curl -X POST \
-       https://ggstudio.84-235-173-41.nip.io/services/v2/credentials/OracleGoldenGate/trgCred \
+       https://ggstudio.84-235-173-41.nip.io/services/v2/credentials/OracleGoldenGate/trgConn \
        --user ggadmin:Welcome1234#   \
        --insecure \
        -H 'Cache-Control: no-cache' \
