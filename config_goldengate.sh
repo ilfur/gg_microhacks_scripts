@@ -1,7 +1,7 @@
 #/bin/bash
 curl -X POST \
-       https://ggstudio.84-235-173-41.nip.io/services/v2/credentials/OracleGoldenGate/srcCred \
-       --user ggadmin:Welcome1234#   \
+       https://ggeast.84-235-173-41.nip.io/services/v2/credentials/OracleGoldenGate/srcCred \
+       --user oggadmin:Welcome1234#   \
        --insecure \
        -H 'Cache-Control: no-cache' \
        -d '{
@@ -10,8 +10,8 @@ curl -X POST \
      }'
 
 curl -X POST \
-       https://ggstudio.84-235-173-41.nip.io/services/v2/credentials/OracleGoldenGate/trgCred \
-       --user ggadmin:Welcome1234#   \
+       https://ggeast.84-235-173-41.nip.io/services/v2/credentials/OracleGoldenGate/trgCred \
+       --user oggadmin:Welcome1234#   \
        --insecure \
        -H 'Cache-Control: no-cache' \
        -d '{
@@ -20,8 +20,8 @@ curl -X POST \
      }'
 
 curl -X POST \
-       https://ggstudio.84-235-173-41.nip.io/services/v2/connections/srcConn \
-       --user ggadmin:Welcome1234#   \
+       https://ggeast.84-235-173-41.nip.io/services/v2/connections/srcConn \
+       --user oggadmin:Welcome1234#   \
        --insecure \
        -H 'Cache-Control: no-cache' \
        -d '{
@@ -31,8 +31,8 @@ curl -X POST \
         }}'
 
 curl -X POST \
-       https://ggstudio.84-235-173-41.nip.io/services/v2/connections/trgConn \
-       --user ggadmin:Welcome1234#   \
+       https://ggeast.84-235-173-41.nip.io/services/v2/connections/trgConn \
+       --user oggadmin:Welcome1234#   \
        --insecure \
        -H 'Cache-Control: no-cache' \
        -d '{
@@ -42,22 +42,22 @@ curl -X POST \
         }}'
 
 curl -X POST \
-       https://ggstudio.84-235-173-41.nip.io/services/v2/connections/OracleGoldenGate.trgConn/tables/heartbeat \
-       --user ggadmin:Welcome1234#   \
+       https://ggeast.84-235-173-41.nip.io/services/v2/connections/OracleGoldenGate.trgConn/tables/heartbeat \
+       --user oggadmin:Welcome1234#   \
        --insecure \
        -H 'Cache-Control: no-cache' \
        -d '{"frequency":"60"}'
 
 curl -X POST \
-       https://ggstudio.84-235-173-41.nip.io/services/v2/connections/OracleGoldenGate.srcConn/tables/heartbeat \
-       --user ggadmin:Welcome1234#   \
+       https://ggeast.84-235-173-41.nip.io/services/v2/connections/OracleGoldenGate.srcConn/tables/heartbeat \
+       --user oggadmin:Welcome1234#   \
        --insecure \
        -H 'Cache-Control: no-cache' \
        -d '{"frequency":"60"}'
 
 curl -X POST \
-       https://ggstudio.84-235-173-41.nip.io/services/v2/connections/OracleGoldenGate.srcConn/tables/checkpoint \
-       --user ggadmin:Welcome1234#   \
+       https://ggeast.84-235-173-41.nip.io/services/v2/connections/OracleGoldenGate.srcConn/tables/checkpoint \
+       --user oggadmin:Welcome1234#   \
        --insecure \
        -H 'Cache-Control: no-cache' \
        -d '{
@@ -66,8 +66,8 @@ curl -X POST \
          }'
 
 curl -X POST \
-       https://ggstudio.84-235-173-41.nip.io/services/v2/connections/OracleGoldenGate.trgConn/tables/checkpoint \
-       --user ggadmin:Welcome1234#   \
+       https://ggeast.84-235-173-41.nip.io/services/v2/connections/OracleGoldenGate.trgConn/tables/checkpoint \
+       --user oggadmin:Welcome1234#   \
        --insecure \
        -H 'Cache-Control: no-cache' \
        -d '{
@@ -76,8 +76,8 @@ curl -X POST \
          }'
 
 curl -X POST \
-       https://ggstudio.84-235-173-41.nip.io/services/v2/connections/OracleGoldenGate.srcConn/trandata/schema \
-       --user ggadmin:Welcome1234#   \
+       https://ggeast.84-235-173-41.nip.io/services/v2/connections/OracleGoldenGate.srcConn/trandata/schema \
+       --user oggadmin:Welcome1234#   \
        --insecure \
        -H 'Cache-Control: no-cache' \
        -d '{
@@ -86,8 +86,8 @@ curl -X POST \
        }'
 
 curl -X POST \
-       https://ggstudio.84-235-173-41.nip.io/services/v2/connections/OracleGoldenGate.trgConn/trandata/schema \
-       --user ggadmin:Welcome1234#   \
+       https://ggeast.84-235-173-41.nip.io/services/v2/connections/OracleGoldenGate.trgConn/trandata/schema \
+       --user oggadmin:Welcome1234#   \
        --insecure \
        -H 'Cache-Control: no-cache' \
        -d '{
@@ -96,8 +96,8 @@ curl -X POST \
        }'
 
 curl -X POST \
-       https://ggstudio.84-235-173-41.nip.io/services/v2/extracts/ES \
-       --user ggadmin:Welcome1234#   \
+       https://ggeast.84-235-173-41.nip.io/services/v2/extracts/ES \
+       --user oggadmin:Welcome1234#   \
        --insecure \
        -H 'Cache-Control: no-cache' \
        -d '{
@@ -143,8 +143,8 @@ curl -X POST \
    }'
 
 curl -X POST \
-       https://ggstudio.84-235-173-41.nip.io/services/v2/extracts/ET \
-       --user ggadmin:Welcome1234#   \
+       https://ggeast.84-235-173-41.nip.io/services/v2/extracts/ET \
+       --user oggadmin:Welcome1234#   \
        --insecure \
        -H 'Cache-Control: no-cache' \
        -d '{
@@ -190,8 +190,8 @@ curl -X POST \
    }'
 
 curl -X POST \
-       https://ggstudio.84-235-173-41.nip.io/services/v2/replicats/RS \
-       --user ggadmin:Welcome1234#   \
+       https://ggeast.84-235-173-41.nip.io/services/v2/replicats/RS \
+       --user oggadmin:Welcome1234#   \
        --insecure \
        -H 'Cache-Control: no-cache' \
        -d '{
@@ -240,8 +240,8 @@ curl -X POST \
    }'
 
    curl -X POST \
-       https://ggstudio.84-235-173-41.nip.io/services/v2/replicats/RT \
-       --user ggadmin:Welcome1234#   \
+       https://ggeast.84-235-173-41.nip.io/services/v2/replicats/RT \
+       --user oggadmin:Welcome1234#   \
        --insecure \
        -H 'Cache-Control: no-cache' \
        -d '{
