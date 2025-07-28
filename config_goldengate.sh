@@ -96,7 +96,7 @@ curl -X POST \
        }'
 
 curl -X POST \
-       https://ggstudio.84-235-173-41.nip.io/services/v2/extracts/HRX \
+       https://ggstudio.84-235-173-41.nip.io/services/v2/extracts/HRS \
        --user ggadmin:Welcome1234#   \
        --insecure \
        -H 'Cache-Control: no-cache' \
@@ -109,14 +109,14 @@ curl -X POST \
     "managedProcessSettings": "ogg:managedProcessSettings:Default",
     "targets": [
       {
-        "name": "HR",
+        "name": "H1",
         "sizeMB": 500,
       }
     ],
     "config": [
-      "EXTRACT HRX",
+      "EXTRACT HRS",
       "USERIDALIAS srcCred DOMAIN OracleGoldenGate",
-      "EXTTRAIL HR",
+      "EXTTRAIL H1",
       "FETCHOPTIONS, USESNAPSHOT, NOUSELATESTVERSION, MISSINGROW REPORT",
       "WARNLONGTRANS 15 MINUTES, CHECKINTERVAL 5 MINUTES",
 	"",
@@ -137,10 +137,54 @@ curl -X POST \
     "source": "tranlogs",
     "type": "Integrated",
     "registration": {
-      "share": false,
-      "containers": [
-        "FREEPDB1"
-      ]
+      "optimized": true
+     },
+    "begin": "now"
+   }'
+
+curl -X POST \
+       https://ggstudio.84-235-173-41.nip.io/services/v2/extracts/HRT \
+       --user ggadmin:Welcome1234#   \
+       --insecure \
+       -H 'Cache-Control: no-cache' \
+       -d '{
+    "credentials": {
+      "alias": "trgConn",
+      "domain": "OracleGoldenGate"
+    },
+    "encryptionProfile": "LocalWallet",
+    "managedProcessSettings": "ogg:managedProcessSettings:Default",
+    "targets": [
+      {
+        "name": "H2",
+        "sizeMB": 500,
+      }
+    ],
+    "config": [
+      "EXTRACT HRT",
+      "USERIDALIAS srcCred DOMAIN OracleGoldenGate",
+      "EXTTRAIL H2",
+      "FETCHOPTIONS, USESNAPSHOT, NOUSELATESTVERSION, MISSINGROW REPORT",
+      "WARNLONGTRANS 15 MINUTES, CHECKINTERVAL 5 MINUTES",
+	"",
+	"DDL           INCLUDE MAPPED",
+	"",
+	"PROCEDURE INCLUDE FEATURE ALL_SUPPORTED",
+	"TRANLOGOPTIONS INTEGRATEDPARAMS (PARALLELISM 0, _LOGMINER_PARALLEL_READ N, max_sga_size 150)",
+	"DDLOPTIONS REPORT",
+	"TRANLOGOPTIONS EXCLUDETAG 00",
+	"",
+	"REPORTCOUNT EVERY 15 MINUTES, RATE",
+	"",
+	"STATOPTIONS REPORTFETCH",
+	"",
+	"TABLE HR.*;"
+   ],
+    "description": "Target HR2 Schema extract",
+    "source": "tranlogs",
+    "type": "Integrated",
+    "registration": {
+      "optimized": true
      },
     "begin": "now"
    }'
