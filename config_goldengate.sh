@@ -96,7 +96,7 @@ curl -X POST \
        }'
 
 curl -X POST \
-       https://ggstudio.84-235-173-41.nip.io/services/v2/extracts/HRS \
+       https://ggstudio.84-235-173-41.nip.io/services/v2/extracts/ES \
        --user ggadmin:Welcome1234#   \
        --insecure \
        -H 'Cache-Control: no-cache' \
@@ -109,14 +109,14 @@ curl -X POST \
     "managedProcessSettings": "ogg:managedProcessSettings:Default",
     "targets": [
       {
-        "name": "H1",
+        "name": "ES",
         "sizeMB": 500,
       }
     ],
     "config": [
-      "EXTRACT HRS",
+      "EXTRACT ES",
       "USERIDALIAS srcCred DOMAIN OracleGoldenGate",
-      "EXTTRAIL H1",
+      "EXTTRAIL ES",
       "FETCHOPTIONS, USESNAPSHOT, NOUSELATESTVERSION, MISSINGROW REPORT",
       "WARNLONGTRANS 15 MINUTES, CHECKINTERVAL 5 MINUTES",
 	"",
@@ -143,7 +143,7 @@ curl -X POST \
    }'
 
 curl -X POST \
-       https://ggstudio.84-235-173-41.nip.io/services/v2/extracts/HRT \
+       https://ggstudio.84-235-173-41.nip.io/services/v2/extracts/ET \
        --user ggadmin:Welcome1234#   \
        --insecure \
        -H 'Cache-Control: no-cache' \
@@ -156,14 +156,14 @@ curl -X POST \
     "managedProcessSettings": "ogg:managedProcessSettings:Default",
     "targets": [
       {
-        "name": "H2",
+        "name": "ET",
         "sizeMB": 500,
       }
     ],
     "config": [
-      "EXTRACT HRT",
+      "EXTRACT ET",
       "USERIDALIAS srcCred DOMAIN OracleGoldenGate",
-      "EXTTRAIL H2",
+      "EXTTRAIL ET",
       "FETCHOPTIONS, USESNAPSHOT, NOUSELATESTVERSION, MISSINGROW REPORT",
       "WARNLONGTRANS 15 MINUTES, CHECKINTERVAL 5 MINUTES",
 	"",
@@ -180,11 +180,111 @@ curl -X POST \
 	"",
 	"TABLE HR.*;"
    ],
-    "description": "Target HR2 Schema extract",
+    "description": "Target HR Schema extract",
     "source": "tranlogs",
     "type": "Integrated",
     "registration": {
       "optimized": true
      },
     "begin": "now"
+   }'
+
+curl -X POST \
+       https://ggstudio.84-235-173-41.nip.io/services/v2/replicats/RS \
+       --user ggadmin:Welcome1234#   \
+       --insecure \
+       -H 'Cache-Control: no-cache' \
+       -d '{
+    "credentials": {
+      "alias": "srcConn",
+      "domain": "OracleGoldenGate"
+    },
+    "begin": {
+      "sequence": 0,
+      "offset": 0
+    },
+    "encryptionProfile": "LocalWallet",
+    "managedProcessSettings": "ogg:managedProcessSettings:Default",
+    "config": [
+      "REPLICAT RS",
+      "USERIDALIAS srcCred DOMAIN OracleGoldenGate",
+      "ALLOWNOOPUPDATES",
+	"",
+	"DBOPTIONS ENABLE_INSTANTIATION_FILTERING",
+	"",
+	"DDLERROR DEFAULT ABEND",
+	"",
+	"REPERROR (DEFAULT,RETRYOP MAXRETRIES 1)",
+	"REPERROR (26960, DISCARD)",
+	"REPERROR (PROCEDURE, DISCARD)",
+	"",
+	"DDL           INCLUDE MAPPED",
+	"DDLOPTIONS REPORT",
+	"",
+	"REPORTCOUNT EVERY 15 MINUTES, RATE",
+	"",
+	"MAPINVISIBLECOLUMNS",
+	"",
+	"MAP HR.*, TARGET HR.*;",
+    ],
+    "source": {
+      "name": "ET"
+    },
+    "checkpoint": {
+      "table": "GGADMIN.CHECKPOINTS"
+    },
+    "mode": {
+      "type": "integrated",
+      "parallel": false
+    }
+   }'
+
+   curl -X POST \
+       https://ggstudio.84-235-173-41.nip.io/services/v2/replicats/RT \
+       --user ggadmin:Welcome1234#   \
+       --insecure \
+       -H 'Cache-Control: no-cache' \
+       -d '{
+    "credentials": {
+      "alias": "trgConn",
+      "domain": "OracleGoldenGate"
+    },
+    "begin": {
+      "sequence": 0,
+      "offset": 0
+    },
+    "encryptionProfile": "LocalWallet",
+    "managedProcessSettings": "ogg:managedProcessSettings:Default",
+    "config": [
+      "REPLICAT RT",
+      "USERIDALIAS trgCred DOMAIN OracleGoldenGate",
+      "ALLOWNOOPUPDATES",
+	"",
+	"DBOPTIONS ENABLE_INSTANTIATION_FILTERING",
+	"",
+	"DDLERROR DEFAULT ABEND",
+	"",
+	"REPERROR (DEFAULT,RETRYOP MAXRETRIES 1)",
+	"REPERROR (26960, DISCARD)",
+	"REPERROR (PROCEDURE, DISCARD)",
+	"",
+	"DDL           INCLUDE MAPPED",
+	"DDLOPTIONS REPORT",
+	"",
+	"REPORTCOUNT EVERY 15 MINUTES, RATE",
+	"",
+	"MAPINVISIBLECOLUMNS",
+	"",
+	"MAP HR.*, TARGET HR.*;",
+    ],
+    "source": {
+      "name": "ES"
+    },
+    "checkpoint": {
+      "table": "GGADMIN.CHECKPOINTS"
+    },
+    "mode": {
+      "type": "integrated",
+      "parallel": false
+    }
    }'
