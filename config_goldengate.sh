@@ -135,7 +135,7 @@ curl -X POST \
    ],
     "description": "Source HR Schema extract",
     "source": "tranlogs",
-    "type": "Integrated",
+    "type": "integrated",
     "registration": {
       "optimized": true
      },
@@ -182,7 +182,7 @@ curl -X POST \
    ],
     "description": "Target HR Schema extract",
     "source": "tranlogs",
-    "type": "Integrated",
+    "type": "integrated",
     "registration": {
       "optimized": true
      },
