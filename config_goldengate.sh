@@ -1,6 +1,6 @@
 #/bin/bash
 curl -X POST \
-       https://ggstudio.84-235-173-41.nip.io/services/v2/credentials/OracleGoldenGate/srcConn \
+       https://ggstudio.84-235-173-41.nip.io/services/v2/credentials/OracleGoldenGate/srcCred \
        --user ggadmin:Welcome1234#   \
        --insecure \
        -H 'Cache-Control: no-cache' \
@@ -10,7 +10,7 @@ curl -X POST \
      }'
 
 curl -X POST \
-       https://ggstudio.84-235-173-41.nip.io/services/v2/credentials/OracleGoldenGate/trgConn \
+       https://ggstudio.84-235-173-41.nip.io/services/v2/credentials/OracleGoldenGate/trgCred \
        --user ggadmin:Welcome1234#   \
        --insecure \
        -H 'Cache-Control: no-cache' \
@@ -18,6 +18,17 @@ curl -X POST \
          "userid":"ggadmin@(description= (retry_count=20)(retry_delay=3)(address=(protocol=tcps)(port=1521)(host=adb.eu-frankfurt-1.oraclecloud.com))(connect_data=(service_name=gfde677d3a923a9_atp23ai_low.adb.oraclecloud.com))(security=(ssl_server_dn_match=yes)))",
          "password":"Welcome1234#"
      }'
+
+curl -X POST \
+       https://ggstudio.84-235-173-41.nip.io/services/v2/connections/srcConn \
+       --user ggadmin:Welcome1234#   \
+       --insecure \
+       -H 'Cache-Control: no-cache' \
+       -d '{
+        "credentials":{
+        "domain":"OracleGoldenGate",
+        "alias":"srcCred"
+        }}'
 
 curl -X POST \
        https://ggstudio.84-235-173-41.nip.io/services/v2/connections/OracleGoldenGate.trgConn/tables/heartbeat \
