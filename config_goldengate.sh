@@ -183,6 +183,12 @@ curl -X POST \
     "begin": "now"
    }'
 
+curl -X PATCH https://ggeast.84-235-173-41.nip.io/services/v2/extracts/ET \
+       --user oggadmin:Welcome1234#   \
+       --insecure \
+       -H 'Cache-Control: no-cache' \
+       -d '{"status": "running"}' 
+
 curl -X POST \
        https://ggeast.84-235-173-41.nip.io/services/v2/replicats/RS \
        --user oggadmin:Welcome1234#   \
