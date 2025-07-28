@@ -219,7 +219,7 @@ curl -X POST \
 	"",
 	"MAPINVISIBLECOLUMNS",
 	"",
-	"MAP HR.*, TARGET HR.*;",
+	"MAP HR.*, TARGET HR.*;"
     ],
     "source": {
       "name": "ET"
@@ -269,7 +269,7 @@ curl -X POST \
 	"",
 	"MAPINVISIBLECOLUMNS",
 	"",
-	"MAP HR.*, TARGET HR.*;",
+	"MAP HR.*, TARGET HR.*;"
     ],
     "source": {
       "name": "ES"
