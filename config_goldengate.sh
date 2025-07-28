@@ -102,7 +102,7 @@ curl -X POST \
        -H 'Cache-Control: no-cache' \
        -d '{
     "credentials": {
-      "alias": "srcConn",
+      "alias": "srcCred",
       "domain": "OracleGoldenGate"
     },
     "encryptionProfile": "LocalWallet",
@@ -146,7 +146,7 @@ curl -X POST \
        -H 'Cache-Control: no-cache' \
        -d '{
     "credentials": {
-      "alias": "trgConn",
+      "alias": "trgCred",
       "domain": "OracleGoldenGate"
     },
     "encryptionProfile": "LocalWallet",
