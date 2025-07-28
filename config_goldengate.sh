@@ -19,4 +19,19 @@ curl -X POST \
          "password":"Welcome1234#"
      }'
 
-     
+curl -X POST \
+       https://ggstudio.84-235-173-41.nip.io/services/v2/conections/OracleGoldenGate.trgConn/tables/heartbeat \
+       --user ggadmin:Welcome1234#   \
+       --insecure \
+       -H 'Cache-Control: no-cache' \
+       -d '{"frequency":"60"}'
+
+curl -X POST \
+       https://ggstudio.84-235-173-41.nip.io/services/v2/conections/OracleGoldenGate.srcConn/tables/heartbeat \
+       --user ggadmin:Welcome1234#   \
+       --insecure \
+       -H 'Cache-Control: no-cache' \
+       -d '{"frequency":"60"}'
+
+
+
