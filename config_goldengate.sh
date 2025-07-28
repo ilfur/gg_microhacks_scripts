@@ -1,6 +1,6 @@
 #/bin/bash
 curl -X POST \
-       https://ggstudio.84-235-173-41.nip.io/services/v2/credentials/OracleGoldenGate/srcConn \
+       https://ggstudio.84-235-173-41.nip.io/services/v2/credentials/OracleGoldenGate/srcCred \
        --user ggadmin:Welcome1234#   \
        --insecure \
        -H 'Cache-Control: no-cache' \
@@ -10,7 +10,7 @@ curl -X POST \
      }'
 
 curl -X POST \
-       https://ggstudio.84-235-173-41.nip.io/services/v2/credentials/OracleGoldenGate/trgConn \
+       https://ggstudio.84-235-173-41.nip.io/services/v2/credentials/OracleGoldenGate/trgCred \
        --user ggadmin:Welcome1234#   \
        --insecure \
        -H 'Cache-Control: no-cache' \
@@ -73,3 +73,52 @@ curl -X POST \
            "schemaName":"HR2"
        }'
 
+curl -X POST \
+       https://ggstudio.84-235-173-41.nip.io/services/v2/extracts/HRX \
+       --user ggadmin:Welcome1234#   \
+       --insecure \
+       -H 'Cache-Control: no-cache' \
+       -d '{
+    "credentials": {
+      "alias": "srcConn",
+      "domain": "OracleGoldenGate"
+    },
+    "encryptionProfile": "LocalWallet",
+    "managedProcessSettings": "ogg:managedProcessSettings:Default",
+    "targets": [
+      {
+        "name": "HR",
+        "sizeMB": 500,
+      }
+    ],
+    "config": [
+      "EXTRACT HRX",
+      "USERIDALIAS srcCred DOMAIN OracleGoldenGate",
+      "EXTTRAIL HR",
+      "FETCHOPTIONS, USESNAPSHOT, NOUSELATESTVERSION, MISSINGROW REPORT",
+      "WARNLONGTRANS 15 MINUTES, CHECKINTERVAL 5 MINUTES",
+	"",
+	"DDL           INCLUDE MAPPED",
+	"",
+	"PROCEDURE INCLUDE FEATURE ALL_SUPPORTED",
+	"TRANLOGOPTIONS INTEGRATEDPARAMS (_ENABLE_PROCEDURAL_REPLICATION Y) _INFINITYTOZERO",
+	"DDLOPTIONS REPORT",
+	"TRANLOGOPTIONS EXCLUDETAG 00",
+	"",
+	"REPORTCOUNT EVERY 15 MINUTES, RATE",
+	"",
+	"STATOPTIONS REPORTFETCH",
+	"",
+	"TABLE HR.*;"
+   ],
+    "description": "Source HR Schema extract",
+    "source": "tranlogs",
+    "type": "Integrated",
+    "registration": {
+      "share": false,
+      "containers": [
+        "FREEPDB1"
+      ]
+     },
+    "begin": "now"
+   }'
