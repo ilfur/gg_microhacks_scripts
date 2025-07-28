@@ -33,5 +33,13 @@ curl -X POST \
        -H 'Cache-Control: no-cache' \
        -d '{"frequency":"60"}'
 
-
+curl -X POST \
+       https://ggstudio.84-235-173-41.nip.io/services/v2/conections/OracleGoldenGate.srcConn/tables/checkpoint \
+       --user ggadmin:Welcome1234#   \
+       --insecure \
+       -H 'Cache-Control: no-cache' \
+       -d '{
+           "operation":"add",
+           "name":"oggadmin.checkpoints"
+         }'
 
