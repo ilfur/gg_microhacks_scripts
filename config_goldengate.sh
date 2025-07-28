@@ -6,7 +6,7 @@ curl -X POST \
        -H 'Cache-Control: no-cache' \
        -d '{
          "userid":"ggadmin@db23ai.oracle23ai:1521/FREEPDB1",
-         "password":"Welcome1234#"
+         "password":"BrunhildeZ32##"
      }'
 
 curl -X POST \
@@ -16,7 +16,7 @@ curl -X POST \
        -H 'Cache-Control: no-cache' \
        -d '{
          "userid":"ggadmin@(description= (retry_count=20)(retry_delay=3)(address=(protocol=tcps)(port=1521)(host=adb.eu-frankfurt-1.oraclecloud.com))(connect_data=(service_name=gfde677d3a923a9_atp23ai_low.adb.oraclecloud.com))(security=(ssl_server_dn_match=yes)))",
-         "password":"Welcome1234#"
+         "password":"BrunhildeZ32##"
      }'
 
 curl -X POST \
