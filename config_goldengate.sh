@@ -42,31 +42,21 @@ curl -X POST \
         }}'
 
 curl -X POST \
-       https://ggeast.84-235-173-41.nip.io/services/v2/connections/OracleGoldenGate.trgConn/tables/heartbeat \
+       https://ggeast.84-235-173-41.nip.io/services/v2/connections/trgConn/tables/heartbeat \
        --user oggadmin:Welcome1234#   \
        --insecure \
        -H 'Cache-Control: no-cache' \
-       -d '{"frequency":"60"}'
+       -d '{"frequency": 60}'
 
 curl -X POST \
-       https://ggeast.84-235-173-41.nip.io/services/v2/connections/OracleGoldenGate.srcConn/tables/heartbeat \
+       https://ggeast.84-235-173-41.nip.io/services/v2/connections/srcConn/tables/heartbeat \
        --user oggadmin:Welcome1234#   \
        --insecure \
        -H 'Cache-Control: no-cache' \
-       -d '{"frequency":"60"}'
+       -d '{"frequency": 60}'
 
 curl -X POST \
-       https://ggeast.84-235-173-41.nip.io/services/v2/connections/OracleGoldenGate.srcConn/tables/checkpoint \
-       --user oggadmin:Welcome1234#   \
-       --insecure \
-       -H 'Cache-Control: no-cache' \
-       -d '{
-           "operation":"add",
-           "name":"ggadmin.checkpoints"
-         }'
-
-curl -X POST \
-       https://ggeast.84-235-173-41.nip.io/services/v2/connections/OracleGoldenGate.trgConn/tables/checkpoint \
+       https://ggeast.84-235-173-41.nip.io/services/v2/connections/srcConn/tables/checkpoint \
        --user oggadmin:Welcome1234#   \
        --insecure \
        -H 'Cache-Control: no-cache' \
@@ -76,7 +66,17 @@ curl -X POST \
          }'
 
 curl -X POST \
-       https://ggeast.84-235-173-41.nip.io/services/v2/connections/OracleGoldenGate.srcConn/trandata/schema \
+       https://ggeast.84-235-173-41.nip.io/services/v2/connections/trgConn/tables/checkpoint \
+       --user oggadmin:Welcome1234#   \
+       --insecure \
+       -H 'Cache-Control: no-cache' \
+       -d '{
+           "operation":"add",
+           "name":"ggadmin.checkpoints"
+         }'
+
+curl -X POST \
+       https://ggeast.84-235-173-41.nip.io/services/v2/connections/srcConn/trandata/schema \
        --user oggadmin:Welcome1234#   \
        --insecure \
        -H 'Cache-Control: no-cache' \
@@ -86,7 +86,7 @@ curl -X POST \
        }'
 
 curl -X POST \
-       https://ggeast.84-235-173-41.nip.io/services/v2/connections/OracleGoldenGate.trgConn/trandata/schema \
+       https://ggeast.84-235-173-41.nip.io/services/v2/connections/trgConn/trandata/schema \
        --user oggadmin:Welcome1234#   \
        --insecure \
        -H 'Cache-Control: no-cache' \
