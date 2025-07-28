@@ -53,3 +53,23 @@ curl -X POST \
            "name":"ggadmin.checkpoints"
          }'
 
+curl -X POST \
+       https://ggstudio.84-235-173-41.nip.io/services/v2/connections/OracleGoldenGate.srcConn/trandata/schema \
+       --user ggadmin:Welcome1234#   \
+       --insecure \
+       -H 'Cache-Control: no-cache' \
+       -d '{
+           "operation":"info",
+           "schemaName":"HR"
+       }'
+
+curl -X POST \
+       https://ggstudio.84-235-173-41.nip.io/services/v2/connections/OracleGoldenGate.trgConn/trandata/schema \
+       --user ggadmin:Welcome1234#   \
+       --insecure \
+       -H 'Cache-Control: no-cache' \
+       -d '{
+           "operation":"info",
+           "schemaName":"HR2"
+       }'
+
