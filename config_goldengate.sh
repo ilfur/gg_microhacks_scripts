@@ -242,7 +242,13 @@ curl -X POST \
     }
    }'
 
-   curl -X POST \
+curl -X PATCH https://ggeast.84-235-173-41.nip.io/services/v2/replicats/RS \
+       --user oggadmin:Welcome1234#   \
+       --insecure \
+       -H 'Cache-Control: no-cache' \
+       -d '{"status": "running"}' 
+       
+curl -X POST \
        https://ggeast.84-235-173-41.nip.io/services/v2/replicats/RT \
        --user oggadmin:Welcome1234#   \
        --insecure \
@@ -288,3 +294,9 @@ curl -X POST \
       "parallel": false
     }
    }'
+
+curl -X PATCH https://ggeast.84-235-173-41.nip.io/services/v2/replicats/RT \
+       --user oggadmin:Welcome1234#   \
+       --insecure \
+       -H 'Cache-Control: no-cache' \
+       -d '{"status": "running"}' 
