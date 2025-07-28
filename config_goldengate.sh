@@ -31,6 +31,17 @@ curl -X POST \
         }}'
 
 curl -X POST \
+       https://ggstudio.84-235-173-41.nip.io/services/v2/connections/trgConn \
+       --user ggadmin:Welcome1234#   \
+       --insecure \
+       -H 'Cache-Control: no-cache' \
+       -d '{
+        "credentials":{
+        "domain":"OracleGoldenGate",
+        "alias":"trgCred"
+        }}'
+
+curl -X POST \
        https://ggstudio.84-235-173-41.nip.io/services/v2/connections/OracleGoldenGate.trgConn/tables/heartbeat \
        --user ggadmin:Welcome1234#   \
        --insecure \
