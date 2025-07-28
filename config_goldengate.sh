@@ -290,7 +290,7 @@ curl -X POST \
       "table": "GGADMIN.CHECKPOINTS"
     },
     "mode": {
-      "type": "integrated",
+      "type": "nonintegrated",
       "parallel": false
     }
    }'
