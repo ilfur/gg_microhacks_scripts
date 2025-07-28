@@ -20,26 +20,36 @@ curl -X POST \
      }'
 
 curl -X POST \
-       https://ggstudio.84-235-173-41.nip.io/services/v2/conections/OracleGoldenGate.trgConn/tables/heartbeat \
+       https://ggstudio.84-235-173-41.nip.io/services/v2/connections/OracleGoldenGate.trgConn/tables/heartbeat \
        --user ggadmin:Welcome1234#   \
        --insecure \
        -H 'Cache-Control: no-cache' \
        -d '{"frequency":"60"}'
 
 curl -X POST \
-       https://ggstudio.84-235-173-41.nip.io/services/v2/conections/OracleGoldenGate.srcConn/tables/heartbeat \
+       https://ggstudio.84-235-173-41.nip.io/services/v2/connections/OracleGoldenGate.srcConn/tables/heartbeat \
        --user ggadmin:Welcome1234#   \
        --insecure \
        -H 'Cache-Control: no-cache' \
        -d '{"frequency":"60"}'
 
 curl -X POST \
-       https://ggstudio.84-235-173-41.nip.io/services/v2/conections/OracleGoldenGate.srcConn/tables/checkpoint \
+       https://ggstudio.84-235-173-41.nip.io/services/v2/connections/OracleGoldenGate.srcConn/tables/checkpoint \
        --user ggadmin:Welcome1234#   \
        --insecure \
        -H 'Cache-Control: no-cache' \
        -d '{
            "operation":"add",
-           "name":"oggadmin.checkpoints"
+           "name":"ggadmin.checkpoints"
+         }'
+
+curl -X POST \
+       https://ggstudio.84-235-173-41.nip.io/services/v2/connections/OracleGoldenGate.trgConn/tables/checkpoint \
+       --user ggadmin:Welcome1234#   \
+       --insecure \
+       -H 'Cache-Control: no-cache' \
+       -d '{
+           "operation":"add",
+           "name":"ggadmin.checkpoints"
          }'
 
