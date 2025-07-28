@@ -92,7 +92,7 @@ curl -X POST \
        -H 'Cache-Control: no-cache' \
        -d '{
            "operation":"info",
-           "schemaName":"HR2"
+           "schemaName":"HR"
        }'
 
 curl -X POST \
@@ -110,7 +110,7 @@ curl -X POST \
     "targets": [
       {
         "name": "ES",
-        "sizeMB": 500,
+        "sizeMB": 500
       }
     ],
     "config": [
@@ -157,7 +157,7 @@ curl -X POST \
     "targets": [
       {
         "name": "ET",
-        "sizeMB": 500,
+        "sizeMB": 500
       }
     ],
     "config": [
