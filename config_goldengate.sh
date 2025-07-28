@@ -193,10 +193,7 @@ curl -X POST \
       "alias": "srcCred",
       "domain": "OracleGoldenGate"
     },
-    "begin": {
-      "sequence": 0,
-      "offset": 0
-    },
+    "begin": "now",
     "encryptionProfile": "LocalWallet",
     "managedProcessSettings": "ogg:managedProcessSettings:Default",
     "config": [
@@ -243,10 +240,7 @@ curl -X POST \
       "alias": "trgCred",
       "domain": "OracleGoldenGate"
     },
-    "begin": {
-      "sequence": 0,
-      "offset": 0
-    },
+    "begin": "now",
     "encryptionProfile": "LocalWallet",
     "managedProcessSettings": "ogg:managedProcessSettings:Default",
     "config": [
