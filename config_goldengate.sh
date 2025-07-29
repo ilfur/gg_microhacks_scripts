@@ -186,7 +186,7 @@ curl -X POST \
     "description": "Target HR Schema extract",
     "source": "tranlogs",
     "type": "Integrated",
-    "registration": "default",
+    "registration": { "share": true },
     "begin": "now"
    }'
 
