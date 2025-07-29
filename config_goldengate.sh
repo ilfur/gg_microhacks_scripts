@@ -12,7 +12,7 @@
 ## SRC_SCHEMA - schema to be synced in source database, like HR
 ## TRG_SCHEMA - schema to be synced in target database, like HR2
 
-export GG_URL=http://oggora-east-goldengate-oracle-free-svc:8080
+export GG_URL=http://oggora-east-goldengate-oracle-free-svc.oggfree:8080
 export GG_USER=oggadmin
 export GG_PWD=Welcome1234#
 export SRC_URL="db23ai.oracle23ai:1521/FREEPDB1"
