@@ -5,6 +5,8 @@
 ## TRG_URL    - target ADB URL, like ggadmin@(description= (retry_count=20)(retry_delay=3)(address=(protocol=tcps)(port=1521)(host=adb.eu-frankfurt-1.oraclecloud.com))(connect_data=(service_name=gfde677d3a923a9_atp23ai_low.adb.oraclecloud.com))(security=(ssl_server_dn_match=yes)))
 ## SRC_PWD    - source database password for URL, like Welcome1234#
 ## TRG_PWD    - target database password for URL, like Welcome1234#
+## SRC_USER   - source database user for goldengate
+## TRG_USER   - target database user for goldengate
 ## GG_USER    - GoldenGate REST API username, like oggadmin
 ## GG_PWD     - GoldenGate REST API password, like Welcome1234#
 ## SRC_SCHEMA - schema to be synced in source database, like HR
@@ -13,9 +15,11 @@
 export GG_URL=http://oggora-east-goldengate-oracle-free-svc:8080
 export GG_USER=oggadmin
 export GG_PWD=Welcome1234#
-export SRC_URL="ggadmin@db23ai.oracle23ai:1521/FREEPDB1"
+export SRC_URL="db23ai.oracle23ai:1521/FREEPDB1"
+export SRC_USER="ggadmin"
 export SRC_PWD="BrunhildeZ32##"
-export TRG_URL="ggadmin@(description= (retry_count=20)(retry_delay=3)(address=(protocol=tcps)(port=1521)(host=adb.eu-frankfurt-1.oraclecloud.com))(connect_data=(service_name=gfde677d3a923a9_atp23ai_low.adb.oraclecloud.com))(security=(ssl_server_dn_match=yes)))"
+export TRG_URL="(description= (retry_count=20)(retry_delay=3)(address=(protocol=tcps)(port=1521)(host=adb.eu-frankfurt-1.oraclecloud.com))(connect_data=(service_name=gfde677d3a923a9_atp23ai_low.adb.oraclecloud.com))(security=(ssl_server_dn_match=yes)))"
+export TRG_USER="ggadmin'
 export TRG_PWD="BrunhildeZ32##"
 
 curl -X POST \
@@ -24,7 +28,7 @@ curl -X POST \
        --insecure \
        -H 'Cache-Control: no-cache' \
        -d '{
-         "userid":"'$SRC_URL'",
+         "userid":"'$SRC_USER'@'$SRC_URL'",
          "password":"'$SRC_PWD'"
      }'
 
@@ -34,7 +38,7 @@ curl -X POST \
        --insecure \
        -H 'Cache-Control: no-cache' \
        -d '{
-         "userid":"'$TRG_URL'",
+         "userid":"'$TRG_USER'@'$TRG_URL'",
          "password":"'$TRG_PWD'"
      }'
 
@@ -81,7 +85,7 @@ curl -X POST \
        -H 'Cache-Control: no-cache' \
        -d '{
            "operation":"add",
-           "name":"ggadmin.checkpoints"
+           "name":"'$SRC_USER'.checkpoints"
          }'
 
 curl -X POST \
@@ -91,7 +95,7 @@ curl -X POST \
        -H 'Cache-Control: no-cache' \
        -d '{
            "operation":"add",
-           "name":"ggadmin.checkpoints"
+           "name":"'$TRG_USER'.checkpoints"
          }'
 
 curl -X POST \
