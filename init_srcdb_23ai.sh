@@ -1,5 +1,4 @@
 #!/bin/bash
-#/bin/bash
 ## Variables used:
 ## SRC_URL    - source database URL, like ggadmin@db23ai.oracle23ai:1521/FREEPDB1
 ## SRC_PWD    - source database password for URL, like Welcome1234#
