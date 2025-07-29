@@ -15,6 +15,8 @@ export GG_USER=oggadmin
 export GG_PWD=Welcome1234#
 export SRC_URL="ggadmin@db23ai.oracle23ai:1521/FREEPDB1"
 export SRC_PWD="BrunhildeZ32##"
+export TRG_URL="ggadmin@(description= (retry_count=20)(retry_delay=3)(address=(protocol=tcps)(port=1521)(host=adb.eu-frankfurt-1.oraclecloud.com))(connect_data=(service_name=gfde677d3a923a9_atp23ai_low.adb.oraclecloud.com))(security=(ssl_server_dn_match=yes)))"
+export TRG_PWD="BrunhildeZ32##"
 
 curl -X POST \
        $GG_URL/services/v2/credentials/OracleGoldenGate/srcCred \
@@ -32,8 +34,8 @@ curl -X POST \
        --insecure \
        -H 'Cache-Control: no-cache' \
        -d '{
-         "userid":"ggadmin@(description= (retry_count=20)(retry_delay=3)(address=(protocol=tcps)(port=1521)(host=adb.eu-frankfurt-1.oraclecloud.com))(connect_data=(service_name=gfde677d3a923a9_atp23ai_low.adb.oraclecloud.com))(security=(ssl_server_dn_match=yes)))",
-         "password":"BrunhildeZ32##"
+         "userid":"'$TRG_URL'",
+         "password":"'$TRG_PWD'"
      }'
 
 curl -X POST \
