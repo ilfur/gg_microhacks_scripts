@@ -7,6 +7,7 @@
 ## SRC_SCHEMA - schema to be synced in source database, like HR
 ## TRG_SCHEMA - schema to be synced in target database, like HR2
 ## ADMIN_PWD  - password of target ADB admin user
+## TNS_ADMIN  - points to tnsnames.ora
 
 export TRG_URL="(description=(retry_count=20)(retry_delay=3)(address=(protocol=tcps)(port=1521)(host=adb.eu-frankfurt-1.oraclecloud.com))(connect_data=(service_name=gfde677d3a923a9_atp23ai_low.adb.oraclecloud.com))(security=(ssl_server_dn_match=yes)))"
 export TRG_USER="ggadmin"
@@ -14,6 +15,7 @@ export TRG_PWD="BrunhildeZ32##"
 export ADMIN_PWD="IridiumBKR6EIX!"
 export SRC_SCHEMA=SH
 export TRG_SCHEMA=SH2
+export TNS_ADMIN=/opt/oracle/product/23ai/dbhomeFree/network/admin
 
 echo "ADP=$TRG_URL">>$TNS_ADMIN
 sqlplus admin/$ADMIN_PWD@ADP <<EOF
