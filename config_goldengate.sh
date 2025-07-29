@@ -10,8 +10,10 @@
 ## SRC_SCHEMA - schema to be synced in source database, like HR
 ## TRG_SCHEMA - schema to be synced in target database, like HR2
 
+export GG_URL=http://oggora-east-goldengate-oracle-free-svc:8080
+
 curl -X POST \
-       https://ggeast.84-235-173-41.nip.io/services/v2/credentials/OracleGoldenGate/srcCred \
+       $GG_URL/services/v2/credentials/OracleGoldenGate/srcCred \
        --user oggadmin:Welcome1234#   \
        --insecure \
        -H 'Cache-Control: no-cache' \
@@ -21,7 +23,7 @@ curl -X POST \
      }'
 
 curl -X POST \
-       https://ggeast.84-235-173-41.nip.io/services/v2/credentials/OracleGoldenGate/trgCred \
+       $GG_URL/services/v2/credentials/OracleGoldenGate/trgCred \
        --user oggadmin:Welcome1234#   \
        --insecure \
        -H 'Cache-Control: no-cache' \
@@ -31,7 +33,7 @@ curl -X POST \
      }'
 
 curl -X POST \
-       https://ggeast.84-235-173-41.nip.io/services/v2/connections/srcConn \
+       $GG_URL/services/v2/connections/srcConn \
        --user oggadmin:Welcome1234#   \
        --insecure \
        -H 'Cache-Control: no-cache' \
@@ -42,7 +44,7 @@ curl -X POST \
         }}'
 
 curl -X POST \
-       https://ggeast.84-235-173-41.nip.io/services/v2/connections/trgConn \
+       $GG_URL/services/v2/connections/trgConn \
        --user oggadmin:Welcome1234#   \
        --insecure \
        -H 'Cache-Control: no-cache' \
@@ -53,21 +55,21 @@ curl -X POST \
         }}'
 
 curl -X POST \
-       https://ggeast.84-235-173-41.nip.io/services/v2/connections/trgConn/tables/heartbeat \
+       $GG_URL/services/v2/connections/trgConn/tables/heartbeat \
        --user oggadmin:Welcome1234#   \
        --insecure \
        -H 'Cache-Control: no-cache' \
        -d '{"frequency": 60}'
 
 curl -X POST \
-       https://ggeast.84-235-173-41.nip.io/services/v2/connections/srcConn/tables/heartbeat \
+       $GG_URL/services/v2/connections/srcConn/tables/heartbeat \
        --user oggadmin:Welcome1234#   \
        --insecure \
        -H 'Cache-Control: no-cache' \
        -d '{"frequency": 60}'
 
 curl -X POST \
-       https://ggeast.84-235-173-41.nip.io/services/v2/connections/srcConn/tables/checkpoint \
+       $GG_URL/services/v2/connections/srcConn/tables/checkpoint \
        --user oggadmin:Welcome1234#   \
        --insecure \
        -H 'Cache-Control: no-cache' \
@@ -77,7 +79,7 @@ curl -X POST \
          }'
 
 curl -X POST \
-       https://ggeast.84-235-173-41.nip.io/services/v2/connections/trgConn/tables/checkpoint \
+       $GG_URL/services/v2/connections/trgConn/tables/checkpoint \
        --user oggadmin:Welcome1234#   \
        --insecure \
        -H 'Cache-Control: no-cache' \
@@ -87,7 +89,7 @@ curl -X POST \
          }'
 
 curl -X POST \
-       https://ggeast.84-235-173-41.nip.io/services/v2/connections/srcConn/trandata/schema \
+       $GG_URL/services/v2/connections/srcConn/trandata/schema \
        --user oggadmin:Welcome1234#   \
        --insecure \
        -H 'Cache-Control: no-cache' \
@@ -97,7 +99,7 @@ curl -X POST \
        }'
 
 curl -X POST \
-       https://ggeast.84-235-173-41.nip.io/services/v2/connections/trgConn/trandata/schema \
+       $GG_URL/services/v2/connections/trgConn/trandata/schema \
        --user oggadmin:Welcome1234#   \
        --insecure \
        -H 'Cache-Control: no-cache' \
@@ -107,7 +109,7 @@ curl -X POST \
        }'
 
 curl -X POST \
-       https://ggeast.84-235-173-41.nip.io/services/v2/extracts/ES \
+       $GG_URL/services/v2/extracts/ES \
        --user oggadmin:Welcome1234#   \
        --insecure \
        -H 'Cache-Control: no-cache' \
@@ -154,14 +156,14 @@ curl -X POST \
     ]
 }'
    
-curl -X PATCH https://ggeast.84-235-173-41.nip.io/services/v2/extracts/ES \
+curl -X PATCH $GG_URL/services/v2/extracts/ES \
        --user oggadmin:Welcome1234#   \
        --insecure \
        -H 'Cache-Control: no-cache' \
        -d '{"status": "running"}' 
        
 curl -X POST \
-       https://ggeast.84-235-173-41.nip.io/services/v2/extracts/ET \
+       $GG_URL/services/v2/extracts/ET \
        --user oggadmin:Welcome1234#   \
        --insecure \
        -H 'Cache-Control: no-cache' \
@@ -207,14 +209,14 @@ curl -X POST \
     ]
 }'
 
-curl -X PATCH https://ggeast.84-235-173-41.nip.io/services/v2/extracts/ET \
+curl -X PATCH $GG_URL/services/v2/extracts/ET \
        --user oggadmin:Welcome1234#   \
        --insecure \
        -H 'Cache-Control: no-cache' \
        -d '{"status": "running"}' 
 
 curl -X POST \
-       https://ggeast.84-235-173-41.nip.io/services/v2/replicats/RS \
+       $GG_URL/services/v2/replicats/RS \
        --user oggadmin:Welcome1234#   \
        --insecure \
        -H 'Cache-Control: no-cache' \
@@ -260,14 +262,14 @@ curl -X POST \
     }
    }'
 
-curl -X PATCH https://ggeast.84-235-173-41.nip.io/services/v2/replicats/RS \
+curl -X PATCH $GG_URL/services/v2/replicats/RS \
        --user oggadmin:Welcome1234#   \
        --insecure \
        -H 'Cache-Control: no-cache' \
        -d '{"status": "running"}' 
        
 curl -X POST \
-       https://ggeast.84-235-173-41.nip.io/services/v2/replicats/RT \
+       $GG_URL/services/v2/replicats/RT \
        --user oggadmin:Welcome1234#   \
        --insecure \
        -H 'Cache-Control: no-cache' \
@@ -313,7 +315,7 @@ curl -X POST \
     }
    }'
 
-curl -X PATCH https://ggeast.84-235-173-41.nip.io/services/v2/replicats/RT \
+curl -X PATCH $GG_URL/services/v2/replicats/RT \
        --user oggadmin:Welcome1234#   \
        --insecure \
        -H 'Cache-Control: no-cache' \
