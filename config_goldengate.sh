@@ -1,4 +1,14 @@
 #/bin/bash
+## Variables used:
+## SRC_URL    - source database URL, like ggadmin@db23ai.oracle23ai:1521/FREEPDB1
+## TRG_URL    - target ADB URL, like ggadmin@(description= (retry_count=20)(retry_delay=3)(address=(protocol=tcps)(port=1521)(host=adb.eu-frankfurt-1.oraclecloud.com))(connect_data=(service_name=gfde677d3a923a9_atp23ai_low.adb.oraclecloud.com))(security=(ssl_server_dn_match=yes)))
+## SRC_PWD    - source database password for URL, like Welcome1234#
+## TRG_PWD    - target database password for URL, like Welcome1234#
+## GG_USER    - GoldenGate REST API username, like oggadmin
+## GG_PWD     - GoldenGate REST API password, like Welcome1234#
+## SRC_SCHEMA - schema to be synced in source database, like HR
+## TRG_SCHEMA - schema to be synced in target database, like HR2
+
 curl -X POST \
        https://ggeast.84-235-173-41.nip.io/services/v2/credentials/OracleGoldenGate/srcCred \
        --user oggadmin:Welcome1234#   \
