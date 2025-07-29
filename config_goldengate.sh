@@ -13,6 +13,8 @@
 export GG_URL=http://oggora-east-goldengate-oracle-free-svc:8080
 export GG_USER=oggadmin
 export GG_PWD=Welcome1234#
+export SRC_URL="ggadmin@db23ai.oracle23ai:1521/FREEPDB1"
+export SRC_PWD="BrunhildeZ32##"
 
 curl -X POST \
        $GG_URL/services/v2/credentials/OracleGoldenGate/srcCred \
@@ -20,8 +22,8 @@ curl -X POST \
        --insecure \
        -H 'Cache-Control: no-cache' \
        -d '{
-         "userid":"ggadmin@db23ai.oracle23ai:1521/FREEPDB1",
-         "password":"BrunhildeZ32##"
+         "userid":"'$SRC_URL'",
+         "password":"'$SRC_PWD'"
      }'
 
 curl -X POST \
