@@ -17,7 +17,7 @@ export SRC_SCHEMA=SH
 export TRG_SCHEMA=SH2
 export TNS_ADMIN=/opt/oracle/product/23ai/dbhomeFree/network/admin
 
-echo "ADP=$TRG_URL">>$TNS_ADMIN
+echo "ADP=$TRG_URL" >> $TNS_ADMIN/tnsnames.ora
 sqlplus admin/$ADMIN_PWD@ADP <<EOF
 ALTER USER GGADMIN IDENTIFIED BY $TRG_PWD ACCOUNT UNLOCK;
 BEGIN
