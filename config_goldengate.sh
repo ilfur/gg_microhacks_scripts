@@ -102,42 +102,46 @@ curl -X POST \
        -H 'Cache-Control: no-cache' \
        -d '{
     "credentials": {
-      "alias": "srcCred",
-      "domain": "OracleGoldenGate"
+        "domain": "OracleGoldenGate",
+        "alias": "srcCred"
     },
-    "encryptionProfile": "LocalWallet",
+    "status": "stopped",
+    "begin": "now",
     "managedProcessSettings": "ogg:managedProcessSettings:Default",
+    "encryptionProfile": "LocalWallet",
+    "source": "tranlogs",
+    "registration": {
+        "share": true
+    },
     "targets": [
-      {
-        "name": "ES",
-        "sizeMB": 500
-      }
+        {
+            "name": "ES",
+            "sequence": 0,
+            "sizeMB": 500
+        }
     ],
     "config": [
-      "EXTRACT ES",
-      "USERIDALIAS srcCred DOMAIN OracleGoldenGate",
-      "EXTTRAIL ES",
-      "FETCHOPTIONS, USESNAPSHOT, NOUSELATESTVERSION, MISSINGROW REPORT",
-      "WARNLONGTRANS 15 MINUTES, CHECKINTERVAL 5 MINUTES",
-	"",
-	"DDL           INCLUDE MAPPED",
-	"",
-	"PROCEDURE INCLUDE FEATURE ALL_SUPPORTED",
-	"TRANLOGOPTIONS INTEGRATEDPARAMS (PARALLELISM 0, _ENABLE_PROCEDURAL_REPLICATION Y) _INFINITYTOZERO",
-	"DDLOPTIONS REPORT",
-	"TRANLOGOPTIONS EXCLUDETAG 00",
-	"",
-	"REPORTCOUNT EVERY 15 MINUTES, RATE",
-	"",
-	"STATOPTIONS REPORTFETCH",
-	"",
-	"TABLE HR.*;"
-   ],
-    "description": "Source HR Schema extract",
-    "source": "tranlogs",
-    "registration": "default",
-    "begin": "now"
-   }'
+        "EXTRACT ES",
+        "USERIDALIAS srcCred DOMAIN OracleGoldenGate",
+        "EXTTRAIL ES",
+        "FETCHOPTIONS, USESNAPSHOT, NOUSELATESTVERSION, MISSINGROW REPORT",
+        "WARNLONGTRANS 15 MINUTES, CHECKINTERVAL 5 MINUTES",
+        "\t",
+        "DDL           INCLUDE MAPPED",
+        "\t",
+        "PROCEDURE INCLUDE FEATURE ALL_SUPPORTED",
+        "TRANLOGOPTIONS INTEGRATEDPARAMS (PARALLELISM 0, _ENABLE_PROCEDURAL_REPLICATION Y) _INFINITYTOZERO",
+        "DDLOPTIONS REPORT",
+        "TRANLOGOPTIONS EXCLUDETAG 00",
+        "\t",
+        "REPORTCOUNT EVERY 15 MINUTES, RATE",
+        "\t",
+        "STATOPTIONS REPORTFETCH",
+        "\t",
+        "TABLE HR.*;",
+        ""
+    ]
+}'
    
 curl -X PATCH https://ggeast.84-235-173-41.nip.io/services/v2/extracts/ES \
        --user oggadmin:Welcome1234#   \
