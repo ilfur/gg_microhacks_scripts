@@ -42,7 +42,7 @@ DECLARE
 BEGIN
     job_name := dbms_scheduler.generate_job_name('import_');
     job_handle := dbms_datapump.open(operation => 'IMPORT', job_mode => 'SCHEMA', job_name => job_name); 
-    dbms_datapump.add_file(handle => job_handle, filename => dump_file_name, directory => credential_name, filetype => dbms_datapump.ku$_file_type_uridump_file); 
+    dbms_datapump.add_file(handle => job_handle, filename => dump_file_name, directory => credential_name, filetype => dbms_datapump.ku\$_file_type_uridump_file); 
     dbms_datapump.add_file(handle => job_handle, filename => import_schema || '_import.log', directory => data_pump_dir, filetype => 3);
     dbms_datapump.metadata_remap(job_handle, 'REMAP_SCHEMA', exported_schema, import_schema);
     dbms_datapump.metadata_filter(handle => job_handle, name => 'SCHEMA_EXPR', value => 'IN(''' || exported_schema || ''')');
