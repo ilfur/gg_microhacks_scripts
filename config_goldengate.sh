@@ -160,6 +160,7 @@ curl -X POST \
     "targets": [
       {
         "name": "ET",
+	"sequence": 0,
         "sizeMB": 500
       }
     ],
@@ -185,8 +186,8 @@ curl -X POST \
    ],
     "description": "Target HR Schema extract",
     "source": "tranlogs",
-    "type": "Integrated",
-    "registration": { "share": "ET" },
+    "registration": { "share": true },
+    "status": "stopped",
     "begin": "now"
    }'
 
