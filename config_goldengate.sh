@@ -19,8 +19,10 @@ export SRC_URL="db23ai.oracle23ai:1521/FREEPDB1"
 export SRC_USER="ggadmin"
 export SRC_PWD="BrunhildeZ32##"
 export TRG_URL="(description= (retry_count=20)(retry_delay=3)(address=(protocol=tcps)(port=1521)(host=adb.eu-frankfurt-1.oraclecloud.com))(connect_data=(service_name=gfde677d3a923a9_atp23ai_low.adb.oraclecloud.com))(security=(ssl_server_dn_match=yes)))"
-export TRG_USER="ggadmin'
+export TRG_USER="ggadmin"
 export TRG_PWD="BrunhildeZ32##"
+export SRC_SCHEMA=HR
+export TRG_SCHEMA=HR2
 
 curl -X POST \
        $GG_URL/services/v2/credentials/OracleGoldenGate/srcCred \
@@ -105,7 +107,7 @@ curl -X POST \
        -H 'Cache-Control: no-cache' \
        -d '{
            "operation":"info",
-           "schemaName":"HR"
+           "schemaName":"'$SRC_SCHEMA'"
        }'
 
 curl -X POST \
@@ -115,7 +117,7 @@ curl -X POST \
        -H 'Cache-Control: no-cache' \
        -d '{
            "operation":"info",
-           "schemaName":"HR"
+           "schemaName":"'$TRG_SCHEMA'"
        }'
 
 curl -X POST \
@@ -161,7 +163,7 @@ curl -X POST \
         "\t",
         "STATOPTIONS REPORTFETCH",
         "\t",
-        "TABLE HR.*;",
+        "TABLE '$SRC_SCHEMA'.*;",
         ""
     ]
 }'
@@ -215,7 +217,7 @@ curl -X POST \
         "\t",
         "STATOPTIONS REPORTFETCH",
         "\t",
-        "TABLE HR.*;"
+        "TABLE '$TRG_SCHEMA'.*;"
     ]
 }'
 
@@ -258,7 +260,7 @@ curl -X POST \
 	"",
 	"MAPINVISIBLECOLUMNS",
 	"",
-	"MAP HR.*, TARGET HR.*;"
+	"MAP '$TRG_SCHEMA'.*, TARGET '$SRC_SCHEMA'.*;"
     ],
     "source": {
       "name": "ET"
@@ -311,7 +313,7 @@ curl -X POST \
 	"",
 	"MAPINVISIBLECOLUMNS",
 	"",
-	"MAP HR.*, TARGET HR.*;"
+	"MAP '$SRC_SCHEMA'.*, TARGET '$TRG_SCHEMA'.*;"
     ],
     "source": {
       "name": "ES"
