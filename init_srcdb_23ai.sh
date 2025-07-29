@@ -12,8 +12,15 @@ export SRC_PWD="BrunhildeZ32##"
 export ADMIN_PWD="BrunhildeZ32##"
 
 # Loading the SH schema initially 
-curl -v https://objectstorage.eu-frankfurt-1.oraclecloud.com/p/peq5JVouDUrhcYFEzQ8GCznr4PBcuQzgCG1a9NBnLeip6Z9qiD6x77bdfnO0e0er/n/frul1g8cgfam/b/hr-sh-sample-data/o/sh.dmp -o sh.dmp
-impdp SYSTEM/$ADMIN_PWD@//$SRC_URL directory=DATA_PUMP_DIR schemas=SH dumpfile=sh.dmp
+# curl -v https://objectstorage.eu-frankfurt-1.oraclecloud.com/p/peq5JVouDUrhcYFEzQ8GCznr4PBcuQzgCG1a9NBnLeip6Z9qiD6x77bdfnO0e0er/n/frul1g8cgfam/b/hr-sh-sample-data/o/sh.dmp -o sh.dmp
+# impdp SYSTEM/$ADMIN_PWD@//$SRC_URL directory=DATA_PUMP_DIR schemas=SH dumpfile=sh.dmp
+# load REMOTELY through shell scripts...
+git clone https://github.com/oracle-samples/db-sample-schemas
+cd db-sample-schemas/sales_history
+sqlplus SYSTEM/$ADMIN_PWD@//$SRC_URL <<EOF
+@sh_install.sql
+Welcome1234#
+EOF
 
 # Now creating GGADMIN user in PDB and granting him GoldenGate read and apply roles
 sqlplus SYSTEM/$ADMIN_PWD@//$SRC_URL <<EOF
