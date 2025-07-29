@@ -1,7 +1,23 @@
 #!/bin/bash
-echo "ADP=$ADB_CONN">>$TNS_ADMIN
+## Variables used:
+## TRG_URL    - target ADB URL, like ggadmin@(description= (retry_count=20)(retry_delay=3)(address=(protocol=tcps)(port=1521)(host=adb.eu-frankfurt-1.oraclecloud.com))(connect_data=(service_name=gfde677d3a923a9_atp23ai_low.adb.oraclecloud.com))(security=(ssl_server_dn_match=yes)))
+## TRG_PWD    - target database password for URL, like Welcome1234#
+## SRC_USER   - source database user for goldengate
+## TRG_USER   - target database user for goldengate
+## SRC_SCHEMA - schema to be synced in source database, like HR
+## TRG_SCHEMA - schema to be synced in target database, like HR2
+## ADMIN_PWD  - password of target ADB admin user
+
+export TRG_URL="(description=(retry_count=20)(retry_delay=3)(address=(protocol=tcps)(port=1521)(host=adb.eu-frankfurt-1.oraclecloud.com))(connect_data=(service_name=gfde677d3a923a9_atp23ai_low.adb.oraclecloud.com))(security=(ssl_server_dn_match=yes)))"
+export TRG_USER="ggadmin"
+export TRG_PWD="BrunhildeZ32##"
+export ADMIN_PWD="IridiumBKR6EIX!"
+export SRC_SCHEMA=SH
+export TRG_SCHEMA=SH2
+
+echo "ADP=$TRG_URL">>$TNS_ADMIN
 sqlplus admin/$ADMIN_PWD@ADP <<EOF
-ALTER USER GGADMIN IDENTIFIED BY $ADMIN_PWD ACCOUNT UNLOCK;
+ALTER USER GGADMIN IDENTIFIED BY $TRG_PWD ACCOUNT UNLOCK;
 BEGIN
   DBMS_CLOUD.CREATE_CREDENTIAL(
     credential_name => 'LOAD_CREDENTIAL',
@@ -10,8 +26,8 @@ BEGIN
 END;
 /
 DECLARE
-    exported_schema VARCHAR2(64)  := 'SH';
-    import_schema   VARCHAR2(64)  := 'SH2'; -- in case you want to remap schema
+    exported_schema VARCHAR2(64)  := '$SRC_SCHEMA';
+    import_schema   VARCHAR2(64)  := '$TRG_SCHEMA'; 
     data_pump_dir   VARCHAR2(64)  := 'DATA_PUMP_DIR';
     dump_file_name  VARCHAR2(256) := 'https://objectstorage.eu-frankfurt-1.oraclecloud.com/p/peq5JVouDUrhcYFEzQ8GCznr4PBcuQzgCG1a9NBnLeip6Z9qiD6x77bdfnO0e0er/n/frul1g8cgfam/b/hr-sh-sample-data/o/sh.dmp';
     credential_name VARCHAR2(64)  := 'LOAD_CREDENTIAL';
