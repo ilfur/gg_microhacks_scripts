@@ -20,6 +20,8 @@ cd db-sample-schemas/sales_history
 sqlplus SYSTEM/$ADMIN_PWD@//$SRC_URL <<EOF
 @sh_install.sql
 Welcome1234#
+
+
 EOF
 
 # Now creating GGADMIN user in PDB and granting him GoldenGate read and apply roles
