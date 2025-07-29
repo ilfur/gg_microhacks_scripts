@@ -11,10 +11,12 @@
 ## TRG_SCHEMA - schema to be synced in target database, like HR2
 
 export GG_URL=http://oggora-east-goldengate-oracle-free-svc:8080
+export GG_USER=oggadmin
+export GG_PWD=Welcome1234#
 
 curl -X POST \
        $GG_URL/services/v2/credentials/OracleGoldenGate/srcCred \
-       --user oggadmin:Welcome1234#   \
+       --user $GG_USER:$GG_PWD   \
        --insecure \
        -H 'Cache-Control: no-cache' \
        -d '{
@@ -24,7 +26,7 @@ curl -X POST \
 
 curl -X POST \
        $GG_URL/services/v2/credentials/OracleGoldenGate/trgCred \
-       --user oggadmin:Welcome1234#   \
+       --user $GG_USER:$GG_PWD   \
        --insecure \
        -H 'Cache-Control: no-cache' \
        -d '{
@@ -34,7 +36,7 @@ curl -X POST \
 
 curl -X POST \
        $GG_URL/services/v2/connections/srcConn \
-       --user oggadmin:Welcome1234#   \
+       --user $GG_USER:$GG_PWD   \
        --insecure \
        -H 'Cache-Control: no-cache' \
        -d '{
@@ -45,7 +47,7 @@ curl -X POST \
 
 curl -X POST \
        $GG_URL/services/v2/connections/trgConn \
-       --user oggadmin:Welcome1234#   \
+       --user $GG_USER:$GG_PWD   \
        --insecure \
        -H 'Cache-Control: no-cache' \
        -d '{
@@ -56,21 +58,21 @@ curl -X POST \
 
 curl -X POST \
        $GG_URL/services/v2/connections/trgConn/tables/heartbeat \
-       --user oggadmin:Welcome1234#   \
+       --user $GG_USER:$GG_PWD   \
        --insecure \
        -H 'Cache-Control: no-cache' \
        -d '{"frequency": 60}'
 
 curl -X POST \
        $GG_URL/services/v2/connections/srcConn/tables/heartbeat \
-       --user oggadmin:Welcome1234#   \
+       --user $GG_USER:$GG_PWD   \
        --insecure \
        -H 'Cache-Control: no-cache' \
        -d '{"frequency": 60}'
 
 curl -X POST \
        $GG_URL/services/v2/connections/srcConn/tables/checkpoint \
-       --user oggadmin:Welcome1234#   \
+       --user $GG_USER:$GG_PWD   \
        --insecure \
        -H 'Cache-Control: no-cache' \
        -d '{
@@ -80,7 +82,7 @@ curl -X POST \
 
 curl -X POST \
        $GG_URL/services/v2/connections/trgConn/tables/checkpoint \
-       --user oggadmin:Welcome1234#   \
+       --user $GG_USER:$GG_PWD   \
        --insecure \
        -H 'Cache-Control: no-cache' \
        -d '{
@@ -90,7 +92,7 @@ curl -X POST \
 
 curl -X POST \
        $GG_URL/services/v2/connections/srcConn/trandata/schema \
-       --user oggadmin:Welcome1234#   \
+       --user $GG_USER:$GG_PWD   \
        --insecure \
        -H 'Cache-Control: no-cache' \
        -d '{
@@ -100,7 +102,7 @@ curl -X POST \
 
 curl -X POST \
        $GG_URL/services/v2/connections/trgConn/trandata/schema \
-       --user oggadmin:Welcome1234#   \
+       --user $GG_USER:$GG_PWD   \
        --insecure \
        -H 'Cache-Control: no-cache' \
        -d '{
@@ -110,7 +112,7 @@ curl -X POST \
 
 curl -X POST \
        $GG_URL/services/v2/extracts/ES \
-       --user oggadmin:Welcome1234#   \
+       --user $GG_USER:$GG_PWD   \
        --insecure \
        -H 'Cache-Control: no-cache' \
        -d '{
@@ -157,14 +159,14 @@ curl -X POST \
 }'
    
 curl -X PATCH $GG_URL/services/v2/extracts/ES \
-       --user oggadmin:Welcome1234#   \
+       --user $GG_USER:$GG_PWD   \
        --insecure \
        -H 'Cache-Control: no-cache' \
        -d '{"status": "running"}' 
        
 curl -X POST \
        $GG_URL/services/v2/extracts/ET \
-       --user oggadmin:Welcome1234#   \
+       --user $GG_USER:$GG_PWD   \
        --insecure \
        -H 'Cache-Control: no-cache' \
        -d '{
@@ -210,14 +212,14 @@ curl -X POST \
 }'
 
 curl -X PATCH $GG_URL/services/v2/extracts/ET \
-       --user oggadmin:Welcome1234#   \
+       --user $GG_USER:$GG_PWD   \
        --insecure \
        -H 'Cache-Control: no-cache' \
        -d '{"status": "running"}' 
 
 curl -X POST \
        $GG_URL/services/v2/replicats/RS \
-       --user oggadmin:Welcome1234#   \
+       --user $GG_USER:$GG_PWD   \
        --insecure \
        -H 'Cache-Control: no-cache' \
        -d '{
@@ -263,14 +265,14 @@ curl -X POST \
    }'
 
 curl -X PATCH $GG_URL/services/v2/replicats/RS \
-       --user oggadmin:Welcome1234#   \
+       --user $GG_USER:$GG_PWD   \
        --insecure \
        -H 'Cache-Control: no-cache' \
        -d '{"status": "running"}' 
        
 curl -X POST \
        $GG_URL/services/v2/replicats/RT \
-       --user oggadmin:Welcome1234#   \
+       --user $GG_USER:$GG_PWD   \
        --insecure \
        -H 'Cache-Control: no-cache' \
        -d '{
@@ -316,7 +318,7 @@ curl -X POST \
    }'
 
 curl -X PATCH $GG_URL/services/v2/replicats/RT \
-       --user oggadmin:Welcome1234#   \
+       --user $GG_USER:$GG_PWD   \
        --insecure \
        -H 'Cache-Control: no-cache' \
        -d '{"status": "running"}' 
