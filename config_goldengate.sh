@@ -9,8 +9,8 @@
 ## TRG_USER   - target database user for goldengate
 ## GG_USER    - GoldenGate REST API username, like oggadmin
 ## GG_PWD     - GoldenGate REST API password, like Welcome1234#
-## SRC_SCHEMA - schema to be synced in source database, like HR
-## TRG_SCHEMA - schema to be synced in target database, like HR2
+## SRC_SCHEMA - schema to be synced in source database, like SH
+## TRG_SCHEMA - schema to be synced in target database, like SH2
 
 export GG_URL=http://oggora-east-goldengate-oracle-free-svc.oggfree:8080
 export GG_USER=oggadmin
@@ -21,8 +21,8 @@ export SRC_PWD="BrunhildeZ32##"
 export TRG_URL="(description=(retry_count=20)(retry_delay=3)(address=(protocol=tcps)(port=1521)(host=adb.eu-frankfurt-1.oraclecloud.com))(connect_data=(service_name=gfde677d3a923a9_atp23ai_low.adb.oraclecloud.com))(security=(ssl_server_dn_match=yes)))"
 export TRG_USER="ggadmin"
 export TRG_PWD="BrunhildeZ32##"
-export SRC_SCHEMA=HR
-export TRG_SCHEMA=HR2
+export SRC_SCHEMA=SH
+export TRG_SCHEMA=SH2
 
 curl -X POST \
        $GG_URL/services/v2/credentials/OracleGoldenGate/srcCred \
