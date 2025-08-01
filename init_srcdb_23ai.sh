@@ -12,22 +12,29 @@
 # load REMOTELY through shell scripts...
 git clone https://github.com/oracle-samples/db-sample-schemas
 cd db-sample-schemas/sales_history
+sed -i "s/ACCEPT pass PROMPT 'Enter a password for the user SH: ' HIDE/DEFINE pass=Welcome1234#/g" sh_install.sql
 sqlplus SYSTEM/$ADMIN_PWD@//$SRC_URL <<EOF
 @sh_install.sql
-Welcome1234#
 
 
 EOF
 
+cd ../..
+
 # Now creating GGADMIN user in PDB and granting him GoldenGate read and apply roles
 sqlplus SYSTEM/$ADMIN_PWD@//$SRC_URL <<EOF
 ALTER PLUGGABLE DATABASE ADD SUPPLEMENTAL LOG DATA ;
-ALTER DATABASE FORCE LOGGING;
-ALTER SYSTEM SWITCH LOGFILE;
+-- ALTER DATABASE FORCE LOGGING;
+-- ALTER SYSTEM SWITCH LOGFILE;
 CREATE USER $SRC_USER IDENTIFIED BY $SRC_PWD
   DEFAULT TABLESPACE USERS
   TEMPORARY TABLESPACE TEMP;
+-- in case the user already exists, like GGADMIN
+ALTER USER $SRC_USER IDENTIFIED BY $SRC_PWD ACCOUNT UNLOCK
+  DEFAULT TABLESPACE USERS
+  TEMPORARY TABLESPACE TEMP;
 GRANT CONNECT, RESOURCE, OGG_CAPTURE, OGG_APPLY to $SRC_USER;
+ALTER USER $SRC_USER QUOTA UNLIMITED ON USERS;
 EOF
 
 
