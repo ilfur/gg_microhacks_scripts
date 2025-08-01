@@ -12,7 +12,7 @@
 # load REMOTELY through shell scripts...
 git clone https://github.com/oracle-samples/db-sample-schemas
 cd db-sample-schemas/sales_history
-sed -i "s/ACCEPT pass PROMPT 'Enter a password for the user SH: ' HIDE/DEFINE pass Welcome1234#/g" sh_install.sql
+sed -i "s/ACCEPT pass PROMPT 'Enter a password for the user SH: ' HIDE/DEFINE pass=Welcome1234#/g" sh_install.sql
 sqlplus SYSTEM/$ADMIN_PWD@//$SRC_URL <<EOF
 @sh_install.sql
 
