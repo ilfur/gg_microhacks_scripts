@@ -19,6 +19,8 @@ sqlplus SYSTEM/$ADMIN_PWD@//$SRC_URL <<EOF
 
 EOF
 
+cd ../..
+
 # Now creating GGADMIN user in PDB and granting him GoldenGate read and apply roles
 sqlplus SYSTEM/$ADMIN_PWD@//$SRC_URL <<EOF
 ALTER PLUGGABLE DATABASE ADD SUPPLEMENTAL LOG DATA ;
