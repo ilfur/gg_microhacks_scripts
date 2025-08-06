@@ -5,7 +5,10 @@ helm show values oggfree/goldengate-microhack-sample >gghack.yaml
 #putting the external address into the goldengate deployment
 sed -i "s/141-147-33-9/${EXTIP// /}/g" gghack.yaml
 
-#sample container pull secret, only required for GG bigdata
+# create the namespace everything goes into
+kubectl create namespace microhacks
+
+#sample container pull secret, only required for GG bigdata/distributed apps
 #  kubectl create secret docker-registry container-registry-secret -n microhacks  --docker-username=marcel.pfeifer@oracle.com --docker-password=yadayada --docker-server=container-registry.oracle.com
 
 
