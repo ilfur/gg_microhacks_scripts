@@ -1,18 +1,17 @@
 #!/bin/bash
 ## Variables used:
 ## TRG_URL    - target ADB URL, like ggadmin@(description= (retry_count=20)(retry_delay=3)(address=(protocol=tcps)(port=1521)(host=adb.eu-frankfurt-1.oraclecloud.com))(connect_data=(service_name=gfde677d3a923a9_atp23ai_low.adb.oraclecloud.com))(security=(ssl_server_dn_match=yes)))
-## TRG_PWD    - target database password for URL, like Welcome1234#
+## TRG_PWD    - target goldengate database password, like Welcome1234#
 ## SRC_USER   - source database user for goldengate
 ## TRG_USER   - target database user for goldengate
 ## SRC_SCHEMA - schema to be synced in source database, like HR
 ## TRG_SCHEMA - schema to be synced in target database, like HR2
-## ADMIN_PWD  - password of target ADB admin user
-## TNS_ADMIN  - points to tnsnames.ora
+## TRG_ADMIN_PWD  - password of target ADB admin user
 
 export TNS_ADMIN=~
 
 echo "ADP=$TRG_URL" >> $TNS_ADMIN/tnsnames.ora
-sqlplus admin/$ADMIN_PWD@ADP <<EOF
+sqlplus admin/$TRG_ADMIN_PWD@ADP <<EOF
 ALTER USER GGADMIN IDENTIFIED BY $TRG_PWD ACCOUNT UNLOCK;
 BEGIN
   DBMS_CLOUD.CREATE_CREDENTIAL(
