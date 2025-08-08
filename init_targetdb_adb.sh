@@ -9,7 +9,7 @@
 ## ADMIN_PWD  - password of target ADB admin user
 ## TNS_ADMIN  - points to tnsnames.ora
 
-#export TNS_ADMIN=/opt/oracle/product/23ai/dbhomeFree/network/admin
+export TNS_ADMIN=~
 
 echo "ADP=$TRG_URL" >> $TNS_ADMIN/tnsnames.ora
 sqlplus admin/$ADMIN_PWD@ADP <<EOF
