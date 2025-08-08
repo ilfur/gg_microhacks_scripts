@@ -4,16 +4,16 @@
 ## SRC_PWD    - source database password for URL, like Welcome1234#
 ## SRC_USER   - source database user for goldengate
 ## SRC_SCHEMA - schema to be synced in source database, like SH
-## ADMIN_PWD  - password for SYSTEM user of source PDB
+## SRC_ADMIN_PWD  - password for SYSTEM user of source PDB
 
 # Loading the SH schema initially 
 # curl -v https://objectstorage.eu-frankfurt-1.oraclecloud.com/p/peq5JVouDUrhcYFEzQ8GCznr4PBcuQzgCG1a9NBnLeip6Z9qiD6x77bdfnO0e0er/n/frul1g8cgfam/b/hr-sh-sample-data/o/sh.dmp -o sh.dmp
-# impdp SYSTEM/$ADMIN_PWD@//$SRC_URL directory=DATA_PUMP_DIR schemas=SH dumpfile=sh.dmp
+# impdp SYSTEM/$SRC_ADMIN_PWD@//$SRC_URL directory=DATA_PUMP_DIR schemas=SH dumpfile=sh.dmp
 # load REMOTELY through shell scripts...
 git clone https://github.com/oracle-samples/db-sample-schemas
 cd db-sample-schemas/sales_history
 sed -i "s/ACCEPT pass PROMPT 'Enter a password for the user SH: ' HIDE/DEFINE pass=Welcome1234#/g" sh_install.sql
-sqlplus SYSTEM/$ADMIN_PWD@//$SRC_URL <<EOF
+sqlplus SYSTEM/$SRC_ADMIN_PWD@//$SRC_URL <<EOF
 @sh_install.sql
 
 
@@ -21,13 +21,13 @@ EOF
 
 cd ../..
 
-sqlplus SYSTEM/$ADMIN_PWD@//$SRC_URL <<EOF
+sqlplus SYSTEM/$SRC_ADMIN_PWD@//$SRC_URL <<EOF
 alter session set container=cdb$root;
 alter system set enable_goldengate_replication=true scope=both;
 EOF
 
 # Now creating GGADMIN user in PDB and granting him GoldenGate read and apply roles
-sqlplus SYSTEM/$ADMIN_PWD@//$SRC_URL <<EOF
+sqlplus SYSTEM/$SRC_ADMIN_PWD@//$SRC_URL <<EOF
 ALTER PLUGGABLE DATABASE ADD SUPPLEMENTAL LOG DATA ;
 -- ALTER DATABASE FORCE LOGGING;
 -- ALTER SYSTEM SWITCH LOGFILE;
