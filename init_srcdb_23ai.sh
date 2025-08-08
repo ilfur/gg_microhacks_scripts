@@ -21,6 +21,11 @@ EOF
 
 cd ../..
 
+sqlplus SYSTEM/$ADMIN_PWD@//$SRC_URL <<EOF
+alter session set container=cdb$root;
+alter system set enable_goldengate_replication=true scope=both;
+EOF
+
 # Now creating GGADMIN user in PDB and granting him GoldenGate read and apply roles
 sqlplus SYSTEM/$ADMIN_PWD@//$SRC_URL <<EOF
 ALTER PLUGGABLE DATABASE ADD SUPPLEMENTAL LOG DATA ;
