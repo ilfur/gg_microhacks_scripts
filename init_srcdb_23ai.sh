@@ -22,7 +22,7 @@ EOF
 cd ../..
 
 sqlplus SYSTEM/$SRC_ADMIN_PWD@//$SRC_URL <<EOF
-alter session set container=cdb$root;
+alter session set container=cdb\$root;
 alter system set enable_goldengate_replication=true scope=both;
 EOF
 
