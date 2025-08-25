@@ -14,3 +14,14 @@ metadata:
 type: kubernetes.io/service-account-token
 EOF
 kubectl get --namespace default secret kubeapps-operator-token -o go-template='{{.data.token | base64decode}}'
+
+cat <<EOF | kubectl apply -f -
+apiVersion: v1
+kind: Secret
+type: kubernetes.io/service-account-token
+metadata:
+  name: kubeapps-token
+  namespace: kubeapps
+  annotations:
+    kubernetes.io/service-account.name: kubeapps-operator
+EOF
