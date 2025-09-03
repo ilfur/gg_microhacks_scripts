@@ -10,5 +10,5 @@ sed -i "s/ggate.141.147.33.9/ggfabric.${EXTIP// /}/g" ggfabric.yaml
 
 #BEFORE running the install, please exchange the target database connection string in gghack.yaml !!!
 
-helm install oggfabric oggfree/goldengatebigdata --values ggfabric.yaml -n microhacks
+helm install oggfabric oggfree/goldengate-bigdata --values ggfabric.yaml -n microhacks
 
