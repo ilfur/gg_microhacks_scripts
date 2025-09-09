@@ -13,7 +13,7 @@ metadata:
 spec:
   ingressClassName: nginx
   rules:
-  - host: beaver.$EXTIP.nip.io
+  - host: beaver.'$EXTIP'.nip.io
     http:
       paths:
       - backend:
