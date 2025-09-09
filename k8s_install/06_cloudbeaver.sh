@@ -4,7 +4,7 @@ helm install cloudbeaver avisto/cloudbeaver --version 1.0.1 -n cloudbeaver
 
 export EXTIP=$(kubectl get service -n ingress-nginx -o jsonpath='{range .items[*]} {.status.loadBalancer.ingress[*].ip} {end}')
 
-kubectl apply -f - <<EOF
+echo "
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
@@ -13,7 +13,7 @@ metadata:
 spec:
   ingressClassName: nginx
   rules:
-  - host: beaver.${EXITP}.nip.io
+  - host: beaver.$EXTIP.nip.io
     http:
       paths:
       - backend:
@@ -23,4 +23,4 @@ spec:
               number: 8978
         path: /
         pathType: Prefix
-EOF
+" | kubectl apply -f -
