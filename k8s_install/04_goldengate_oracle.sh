@@ -3,7 +3,7 @@ export EXTIP=$(kubectl get service -n ingress-nginx -o jsonpath='{range .items[*
 helm repo add oggfree https://ilfur.github.io/VirtualAnalyticRooms
 helm show values oggfree/goldengate-microhack-sample >gghack.yaml
 #putting the external address into the goldengate deployment
-sed -i "s/141-147-33-9/${EXTIP// /}/g" gghack.yaml
+sed -i "s/xxx-xxx-xxx-xxx/${EXTIP// /}/g" gghack.yaml
 
 # create the namespace everything goes into
 kubectl create namespace microhacks
@@ -20,7 +20,7 @@ kubectl create secret generic ogg-admin-secret -n microhacks \
   #create secret for source and target database admin and ogg users to be created (target must be there already!)
 kubectl create secret generic db-admin-secret -n microhacks \
   --from-literal=srcAdminPwd=Welcome1234# \
-  --from-literal=trgAdminPwd="MySecretPassword!" \
+  --from-literal=trgAdminPwd="MySecretPassword123!" \
   --from-literal=srcGGUserName=ggadmin \
   --from-literal=trgGGUserName=ggadmin \
   --from-literal=srcGGPwd=Welcome1234# \
