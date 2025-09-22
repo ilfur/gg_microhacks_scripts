@@ -7,4 +7,4 @@ sed -i "s/xxx-xxx-xxx-xxx/${EXTIP// /}/g" autonomous.yaml
 
 #BEFORE running the install, please exchange the database password in autonomous.yaml !
 kubectl create namespace estateexplorer
-helm install oggfabric oggfree/goldengate-autonomous --values autonomous.yaml -n estateexplorer
+helm install estate-exp oggfree/goldengate-autonomous --values autonomous.yaml -n estateexplorer
