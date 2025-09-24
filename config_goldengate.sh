@@ -26,7 +26,7 @@ curl -X POST \
          "userid":"'$SRC_USER'@'$SRC_URL'",
          "password":"'$SRC_PWD'"
      }'
-sleep 1 ; echo " "	 
+sleep 2 ; echo " "	 
 echo "Creating target credentials"
 curl -X POST \
        $GG_URL/services/v2/credentials/OracleGoldenGate/trgCred \
@@ -38,7 +38,7 @@ curl -X POST \
          "password":"'$TRG_PWD'"
      }'
 	 
-sleep 1 ; echo " "	 
+sleep 2 ; echo " "	 
 echo "Creating source connection"
 curl -X POST \
        $GG_URL/services/v2/connections/srcConn \
@@ -50,7 +50,7 @@ curl -X POST \
         "domain":"OracleGoldenGate",
         "alias":"srcCred"
         }}'
-sleep 1 ; echo " "	 
+sleep 2 ; echo " "	 
 echo "Creating target connection"
 curl -X POST \
        $GG_URL/services/v2/connections/trgConn \
@@ -62,7 +62,7 @@ curl -X POST \
         "domain":"OracleGoldenGate",
         "alias":"trgCred"
         }}'
-sleep 1 ; echo " "	 
+sleep 2 ; echo " "	 
 echo "Creating target heartbeat"
 curl -X POST \
        $GG_URL/services/v2/connections/trgConn/tables/heartbeat \
@@ -70,7 +70,7 @@ curl -X POST \
        --insecure \
        -H 'Cache-Control: no-cache' \
        -d '{"frequency": 60}'
-sleep 1 ; echo " "	 
+sleep 2 ; echo " "	 
 echo "Creating source heartbeat"
 curl -X POST \
        $GG_URL/services/v2/connections/srcConn/tables/heartbeat \
@@ -78,7 +78,7 @@ curl -X POST \
        --insecure \
        -H 'Cache-Control: no-cache' \
        -d '{"frequency": 60}'
-sleep 1 ; echo " "	 
+sleep 2 ; echo " "	 
 echo "Creating source checkpoint"
 curl -X POST \
        $GG_URL/services/v2/connections/srcConn/tables/checkpoint \
@@ -89,7 +89,7 @@ curl -X POST \
            "operation":"add",
            "name":"'$SRC_USER'.checkpoints"
          }'
-sleep 1 ; echo " "	 
+sleep 2 ; echo " "	 
 echo "Creating target checkpoint"
 curl -X POST \
        $GG_URL/services/v2/connections/trgConn/tables/checkpoint \
@@ -100,7 +100,7 @@ curl -X POST \
            "operation":"add",
            "name":"'$TRG_USER'.checkpoints"
          }'
-sleep 1 ; echo " "	 
+sleep 2 ; echo " "	 
 echo "Creating source trandata for schema $SRC_SCHEMA"
 curl -X POST \
        $GG_URL/services/v2/connections/srcConn/trandata/schema \
@@ -111,7 +111,7 @@ curl -X POST \
            "operation":"info",
            "schemaName":"'$SRC_SCHEMA'"
        }'
-sleep 1 ; echo " "	 
+sleep 2 ; echo " "	 
 echo "Creating target trandata for schema $TRG_SCHEMA"
 curl -X POST \
        $GG_URL/services/v2/connections/trgConn/trandata/schema \
@@ -122,7 +122,7 @@ curl -X POST \
            "operation":"info",
            "schemaName":"'$TRG_SCHEMA'"
        }'
-sleep 1 ; echo " "	 
+sleep 2 ; echo " "	 
 echo "Creating source extract"
 curl -X POST \
        $GG_URL/services/v2/extracts/ES \
@@ -171,14 +171,14 @@ curl -X POST \
         ""
     ]
 }'
-sleep 1 ; echo " "	 
+sleep 2 ; echo " "	 
 echo "starting source extract"
 curl -X PATCH $GG_URL/services/v2/extracts/ES \
        --user $GG_USER:$GG_PWD   \
        --insecure \
        -H 'Cache-Control: no-cache' \
        -d '{"status": "running"}' 
-sleep 1 ; echo " "	 
+sleep 2 ; echo " "	 
 echo "creating target extract"       
 curl -X POST \
        $GG_URL/services/v2/extracts/ET \
@@ -226,7 +226,7 @@ curl -X POST \
         "TABLE '$TRG_SCHEMA'.*;"
     ]
 }'
-sleep 1 ; echo " "	 
+sleep 2 ; echo " "	 
 echo "starting target extract"
 curl -X PATCH $GG_URL/services/v2/extracts/ET \
        --user $GG_USER:$GG_PWD   \
@@ -234,7 +234,7 @@ curl -X PATCH $GG_URL/services/v2/extracts/ET \
        -H 'Cache-Control: no-cache' \
        -d '{"status": "running"}' 
 	   
-sleep 1 ; echo " "	 
+sleep 2 ; echo " "	 
 echo "creating source replicat"
 curl -X POST \
        $GG_URL/services/v2/replicats/RS \
@@ -283,7 +283,7 @@ curl -X POST \
     }
    }'
    
-sleep 1 ; echo " "	 
+sleep 2 ; echo " "	 
 echo "starting source replicat"
 curl -X PATCH $GG_URL/services/v2/replicats/RS \
        --user $GG_USER:$GG_PWD   \
@@ -291,7 +291,7 @@ curl -X PATCH $GG_URL/services/v2/replicats/RS \
        -H 'Cache-Control: no-cache' \
        -d '{"status": "running"}' 
        
-sleep 1 ; echo " "	 
+sleep 2 ; echo " "	 
 echo "creating target replicat"
 curl -X POST \
        $GG_URL/services/v2/replicats/RT \
@@ -339,7 +339,7 @@ curl -X POST \
       "parallel": false
     }
    }'
-sleep 1 ; echo " "	 
+sleep 2 ; echo " "	 
 echo "starting target replicat"
 curl -X PATCH $GG_URL/services/v2/replicats/RT \
        --user $GG_USER:$GG_PWD   \
