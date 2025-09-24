@@ -12,6 +12,10 @@
 ## SRC_SCHEMA - schema to be synced in source database, like SH
 ## TRG_SCHEMA - schema to be synced in target database, like SH2
 
+##stripping empty spaces from connection string to be safe
+export TRG_URL=$(echo $TRG_URL|tr -d ' ')
+export SRC_URL=$(echo $SRC_URL|tr -d ' ')
+
 sleep 60
 echo "\nCreating source credentials"
 curl -X POST \
