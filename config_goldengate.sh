@@ -2,7 +2,7 @@
 ## Variables used:
 ## GG_URL     - GoldenGate (k8s internal) URL for REST API access
 ## SRC_URL    - source database URL, like ggadmin@db23ai.oracle23ai:1521/FREEPDB1
-## TRG_URL    - target ADB URL, like ggadmin@(description= (retry_count=20)(retry_delay=3)(address=(protocol=tcps)(port=1521)(host=adb.eu-frankfurt-1.oraclecloud.com))(connect_data=(service_name=gfde677d3a923a9_atp23ai_low.adb.oraclecloud.com))(security=(ssl_server_dn_match=yes)))
+## TRG_URL    - target ADB URL, like ggadmin@(description=(retry_count=20)(retry_delay=3)(address=(protocol=tcps)(port=1521)(host=adb.eu-frankfurt-1.oraclecloud.com))(connect_data=(service_name=gfde677d3a923a9_atp23ai_low.adb.oraclecloud.com))(security=(ssl_server_dn_match=yes)))
 ## SRC_PWD    - source database password for URL, like Welcome1234#
 ## TRG_PWD    - target database password for URL, like Welcome1234#
 ## SRC_USER   - source database user for goldengate
