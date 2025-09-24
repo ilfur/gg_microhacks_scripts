@@ -26,7 +26,19 @@ curl -X POST \
          "userid":"'$SRC_USER'@'$SRC_URL'",
          "password":"'$SRC_PWD'"
      }'
-sleep 2 ; echo " "	 
+while [ $? == "7" ]; do  
+  echo "RETRY - Creating source credentials"
+  curl -X POST \
+       $GG_URL/services/v2/credentials/OracleGoldenGate/srcCred \
+       --user $GG_USER:$GG_PWD   \
+       --insecure \
+       -H 'Cache-Control: no-cache' \
+       -d '{
+         "userid":"'$SRC_USER'@'$SRC_URL'",
+         "password":"'$SRC_PWD'"
+     }'
+done
+echo " "	 
 echo "Creating target credentials"
 curl -X POST \
        $GG_URL/services/v2/credentials/OracleGoldenGate/trgCred \
@@ -37,8 +49,19 @@ curl -X POST \
          "userid":"'$TRG_USER'@'$TRG_URL'",
          "password":"'$TRG_PWD'"
      }'
-	 
-sleep 2 ; echo " "	 
+while [ $? == "7" ]; do  
+echo "RETRY - Creating target credentials"
+curl -X POST \
+       $GG_URL/services/v2/credentials/OracleGoldenGate/trgCred \
+       --user $GG_USER:$GG_PWD   \
+       --insecure \
+       -H 'Cache-Control: no-cache' \
+       -d '{
+         "userid":"'$TRG_USER'@'$TRG_URL'",
+         "password":"'$TRG_PWD'"
+     }'
+done	 
+echo " "	 
 echo "Creating source connection"
 curl -X POST \
        $GG_URL/services/v2/connections/srcConn \
@@ -50,7 +73,20 @@ curl -X POST \
         "domain":"OracleGoldenGate",
         "alias":"srcCred"
         }}'
-sleep 2 ; echo " "	 
+while [ $? == "7" ]; do  
+echo "RETRY - Creating source connection"
+curl -X POST \
+       $GG_URL/services/v2/connections/srcConn \
+       --user $GG_USER:$GG_PWD   \
+       --insecure \
+       -H 'Cache-Control: no-cache' \
+       -d '{
+        "credentials":{
+        "domain":"OracleGoldenGate",
+        "alias":"srcCred"
+        }}'
+done
+echo " "	 
 echo "Creating target connection"
 curl -X POST \
        $GG_URL/services/v2/connections/trgConn \
@@ -62,7 +98,20 @@ curl -X POST \
         "domain":"OracleGoldenGate",
         "alias":"trgCred"
         }}'
-sleep 2 ; echo " "	 
+while [ $? == "7" ]; do  
+echo "RETRY - Creating target connection"
+curl -X POST \
+       $GG_URL/services/v2/connections/trgConn \
+       --user $GG_USER:$GG_PWD   \
+       --insecure \
+       -H 'Cache-Control: no-cache' \
+       -d '{
+        "credentials":{
+        "domain":"OracleGoldenGate",
+        "alias":"trgCred"
+        }}'
+done
+echo " "	 
 echo "Creating target heartbeat"
 curl -X POST \
        $GG_URL/services/v2/connections/trgConn/tables/heartbeat \
@@ -70,7 +119,16 @@ curl -X POST \
        --insecure \
        -H 'Cache-Control: no-cache' \
        -d '{"frequency": 60}'
-sleep 2 ; echo " "	 
+while [ $? == "7" ]; do  
+echo "RETRY - Creating target heartbeat"
+curl -X POST \
+       $GG_URL/services/v2/connections/trgConn/tables/heartbeat \
+       --user $GG_USER:$GG_PWD   \
+       --insecure \
+       -H 'Cache-Control: no-cache' \
+       -d '{"frequency": 60}'
+done
+echo " "	 
 echo "Creating source heartbeat"
 curl -X POST \
        $GG_URL/services/v2/connections/srcConn/tables/heartbeat \
@@ -78,7 +136,16 @@ curl -X POST \
        --insecure \
        -H 'Cache-Control: no-cache' \
        -d '{"frequency": 60}'
-sleep 2 ; echo " "	 
+while [ $? == "7" ]; do  
+echo "RETRY - Creating source heartbeat"
+curl -X POST \
+       $GG_URL/services/v2/connections/srcConn/tables/heartbeat \
+       --user $GG_USER:$GG_PWD   \
+       --insecure \
+       -H 'Cache-Control: no-cache' \
+       -d '{"frequency": 60}'
+done
+echo " "	 
 echo "Creating source checkpoint"
 curl -X POST \
        $GG_URL/services/v2/connections/srcConn/tables/checkpoint \
@@ -89,7 +156,19 @@ curl -X POST \
            "operation":"add",
            "name":"'$SRC_USER'.checkpoints"
          }'
-sleep 2 ; echo " "	 
+while [ $? == "7" ]; do  
+echo "RETRY - Creating source checkpoint"
+curl -X POST \
+       $GG_URL/services/v2/connections/srcConn/tables/checkpoint \
+       --user $GG_USER:$GG_PWD   \
+       --insecure \
+       -H 'Cache-Control: no-cache' \
+       -d '{
+           "operation":"add",
+           "name":"'$SRC_USER'.checkpoints"
+         }'
+done
+echo " "	 
 echo "Creating target checkpoint"
 curl -X POST \
        $GG_URL/services/v2/connections/trgConn/tables/checkpoint \
@@ -100,7 +179,19 @@ curl -X POST \
            "operation":"add",
            "name":"'$TRG_USER'.checkpoints"
          }'
-sleep 2 ; echo " "	 
+while [ $? == "7" ]; do  
+echo "RETRY - Creating target checkpoint"
+curl -X POST \
+       $GG_URL/services/v2/connections/trgConn/tables/checkpoint \
+       --user $GG_USER:$GG_PWD   \
+       --insecure \
+       -H 'Cache-Control: no-cache' \
+       -d '{
+           "operation":"add",
+           "name":"'$TRG_USER'.checkpoints"
+         }'
+done
+echo " "	 
 echo "Creating source trandata for schema $SRC_SCHEMA"
 curl -X POST \
        $GG_URL/services/v2/connections/srcConn/trandata/schema \
@@ -111,7 +202,19 @@ curl -X POST \
            "operation":"info",
            "schemaName":"'$SRC_SCHEMA'"
        }'
-sleep 2 ; echo " "	 
+while [ $? == "7" ]; do  
+echo "RETRY - Creating source trandata for schema $SRC_SCHEMA"
+curl -X POST \
+       $GG_URL/services/v2/connections/srcConn/trandata/schema \
+       --user $GG_USER:$GG_PWD   \
+       --insecure \
+       -H 'Cache-Control: no-cache' \
+       -d '{
+           "operation":"info",
+           "schemaName":"'$SRC_SCHEMA'"
+       }'
+done
+echo " "	 
 echo "Creating target trandata for schema $TRG_SCHEMA"
 curl -X POST \
        $GG_URL/services/v2/connections/trgConn/trandata/schema \
@@ -122,7 +225,19 @@ curl -X POST \
            "operation":"info",
            "schemaName":"'$TRG_SCHEMA'"
        }'
-sleep 2 ; echo " "	 
+while [ $? == "7" ]; do  
+echo "RETRY - Creating target trandata for schema $TRG_SCHEMA"
+curl -X POST \
+       $GG_URL/services/v2/connections/trgConn/trandata/schema \
+       --user $GG_USER:$GG_PWD   \
+       --insecure \
+       -H 'Cache-Control: no-cache' \
+       -d '{
+           "operation":"info",
+           "schemaName":"'$TRG_SCHEMA'"
+       }'
+done
+echo " "	 
 echo "Creating source extract"
 curl -X POST \
        $GG_URL/services/v2/extracts/ES \
@@ -171,14 +286,72 @@ curl -X POST \
         ""
     ]
 }'
-sleep 2 ; echo " "	 
+while [ $? == "7" ]; do  
+echo "RETRY - Creating source extract"
+curl -X POST \
+       $GG_URL/services/v2/extracts/ES \
+       --user $GG_USER:$GG_PWD   \
+       --insecure \
+       -H 'Cache-Control: no-cache' \
+       -d '{
+    "credentials": {
+        "domain": "OracleGoldenGate",
+        "alias": "srcCred"
+    },
+    "status": "stopped",
+    "begin": "now",
+    "managedProcessSettings": "ogg:managedProcessSettings:Default",
+    "encryptionProfile": "LocalWallet",
+    "source": "tranlogs",
+    "registration": {
+        "share": true
+    },
+    "targets": [
+        {
+            "name": "ES",
+            "sequence": 0,
+            "sizeMB": 500
+        }
+    ],
+    "config": [
+        "EXTRACT ES",
+        "USERIDALIAS srcCred DOMAIN OracleGoldenGate",
+        "EXTTRAIL ES",
+        "FETCHOPTIONS, USESNAPSHOT, NOUSELATESTVERSION, MISSINGROW REPORT",
+        "WARNLONGTRANS 15 MINUTES, CHECKINTERVAL 5 MINUTES",
+        "\t",
+        "DDL           INCLUDE MAPPED",
+        "\t",
+        "PROCEDURE INCLUDE FEATURE ALL_SUPPORTED",
+        "TRANLOGOPTIONS INTEGRATEDPARAMS (PARALLELISM 0, _ENABLE_PROCEDURAL_REPLICATION Y) _INFINITYTOZERO",
+        "DDLOPTIONS REPORT",
+        "TRANLOGOPTIONS EXCLUDETAG 00",
+        "\t",
+        "REPORTCOUNT EVERY 15 MINUTES, RATE",
+        "\t",
+        "STATOPTIONS REPORTFETCH",
+        "\t",
+        "TABLE '$SRC_SCHEMA'.*;",
+        ""
+    ]
+}'
+done
+echo " "	 
 echo "starting source extract"
 curl -X PATCH $GG_URL/services/v2/extracts/ES \
        --user $GG_USER:$GG_PWD   \
        --insecure \
        -H 'Cache-Control: no-cache' \
        -d '{"status": "running"}' 
-sleep 2 ; echo " "	 
+while [ $? == "7" ]; do  
+echo "RETRY - starting source extract"
+curl -X PATCH $GG_URL/services/v2/extracts/ES \
+       --user $GG_USER:$GG_PWD   \
+       --insecure \
+       -H 'Cache-Control: no-cache' \
+       -d '{"status": "running"}' 
+done
+echo " "	 
 echo "creating target extract"       
 curl -X POST \
        $GG_URL/services/v2/extracts/ET \
@@ -226,7 +399,56 @@ curl -X POST \
         "TABLE '$TRG_SCHEMA'.*;"
     ]
 }'
-sleep 2 ; echo " "	 
+while [ $? == "7" ]; do  
+echo "RETRY - creating target extract"       
+curl -X POST \
+       $GG_URL/services/v2/extracts/ET \
+       --user $GG_USER:$GG_PWD   \
+       --insecure \
+       -H 'Cache-Control: no-cache' \
+       -d '{
+    "credentials": {
+        "domain": "OracleGoldenGate",
+        "alias": "trgCred"
+    },
+    "status": "stopped",
+    "begin": "now",
+    "managedProcessSettings": "ogg:managedProcessSettings:Default",
+    "encryptionProfile": "LocalWallet",
+    "source": "tranlogs",
+    "registration": {
+        "share": true
+    },
+    "targets": [
+        {
+            "name": "ET",
+            "sequence": 0,
+            "sizeMB": 500
+        }
+    ],
+    "config": [
+        "EXTRACT ET",
+        "USERIDALIAS trgCred DOMAIN OracleGoldenGate",
+        "EXTTRAIL ET",
+        "FETCHOPTIONS, USESNAPSHOT, NOUSELATESTVERSION, MISSINGROW REPORT",
+        "WARNLONGTRANS 15 MINUTES, CHECKINTERVAL 5 MINUTES",
+        "\t",
+        "DDL           INCLUDE MAPPED",
+        "\t",
+        "PROCEDURE INCLUDE FEATURE ALL_SUPPORTED",
+        "TRANLOGOPTIONS INTEGRATEDPARAMS (PARALLELISM 0, _LOGMINER_PARALLEL_READ N, max_sga_size 150)",
+        "DDLOPTIONS REPORT",
+        "TRANLOGOPTIONS EXCLUDETAG 00",
+        "\t",
+        "REPORTCOUNT EVERY 15 MINUTES, RATE",
+        "\t",
+        "STATOPTIONS REPORTFETCH",
+        "\t",
+        "TABLE '$TRG_SCHEMA'.*;"
+    ]
+}'
+done
+echo " "	 
 echo "starting target extract"
 curl -X PATCH $GG_URL/services/v2/extracts/ET \
        --user $GG_USER:$GG_PWD   \
@@ -234,7 +456,15 @@ curl -X PATCH $GG_URL/services/v2/extracts/ET \
        -H 'Cache-Control: no-cache' \
        -d '{"status": "running"}' 
 	   
-sleep 2 ; echo " "	 
+while [ $? == "7" ]; do  
+echo "RETRY - starting target extract"
+curl -X PATCH $GG_URL/services/v2/extracts/ET \
+       --user $GG_USER:$GG_PWD   \
+       --insecure \
+       -H 'Cache-Control: no-cache' \
+       -d '{"status": "running"}' 
+done
+echo " "	 
 echo "creating source replicat"
 curl -X POST \
        $GG_URL/services/v2/replicats/RS \
@@ -283,7 +513,56 @@ curl -X POST \
     }
    }'
    
-sleep 2 ; echo " "	 
+while [ $? == "7" ]; do  
+echo "RETRY - creating source replicat"
+curl -X POST \
+       $GG_URL/services/v2/replicats/RS \
+       --user $GG_USER:$GG_PWD   \
+       --insecure \
+       -H 'Cache-Control: no-cache' \
+       -d '{
+    "credentials": {
+      "alias": "srcCred",
+      "domain": "OracleGoldenGate"
+    },
+    "begin": "now",
+    "encryptionProfile": "LocalWallet",
+    "managedProcessSettings": "ogg:managedProcessSettings:Default",
+    "config": [
+      "REPLICAT RS",
+      "USERIDALIAS srcCred DOMAIN OracleGoldenGate",
+      "ALLOWNOOPUPDATES",
+	"",
+	"DBOPTIONS ENABLE_INSTANTIATION_FILTERING",
+	"",
+	"DDLERROR DEFAULT ABEND",
+	"",
+	"REPERROR (DEFAULT,RETRYOP MAXRETRIES 1)",
+	"REPERROR (26960, DISCARD)",
+	"REPERROR (PROCEDURE, DISCARD)",
+	"",
+	"DDL           INCLUDE MAPPED",
+	"DDLOPTIONS REPORT",
+	"",
+	"REPORTCOUNT EVERY 15 MINUTES, RATE",
+	"",
+	"MAPINVISIBLECOLUMNS",
+	"",
+	"MAP '$TRG_SCHEMA'.*, TARGET '$SRC_SCHEMA'.*;"
+    ],
+    "source": {
+      "name": "ET"
+    },
+    "checkpoint": {
+      "table": "GGADMIN.CHECKPOINTS"
+    },
+    "mode": {
+      "type": "integrated",
+      "parallel": false
+    }
+   }'
+done
+echo " "	 
 echo "starting source replicat"
 curl -X PATCH $GG_URL/services/v2/replicats/RS \
        --user $GG_USER:$GG_PWD   \
@@ -291,7 +570,15 @@ curl -X PATCH $GG_URL/services/v2/replicats/RS \
        -H 'Cache-Control: no-cache' \
        -d '{"status": "running"}' 
        
-sleep 2 ; echo " "	 
+while [ $? == "7" ]; do  
+echo "RETRY - starting source replicat"
+curl -X PATCH $GG_URL/services/v2/replicats/RS \
+       --user $GG_USER:$GG_PWD   \
+       --insecure \
+       -H 'Cache-Control: no-cache' \
+       -d '{"status": "running"}' 
+done
+echo " "	 
 echo "creating target replicat"
 curl -X POST \
        $GG_URL/services/v2/replicats/RT \
@@ -339,10 +626,67 @@ curl -X POST \
       "parallel": false
     }
    }'
-sleep 2 ; echo " "	 
+while [ $? == "7" ]; do  
+echo "RETRY - creating target replicat"
+curl -X POST \
+       $GG_URL/services/v2/replicats/RT \
+       --user $GG_USER:$GG_PWD   \
+       --insecure \
+       -H 'Cache-Control: no-cache' \
+       -d '{
+    "credentials": {
+      "alias": "trgCred",
+      "domain": "OracleGoldenGate"
+    },
+    "begin": "now",
+    "encryptionProfile": "LocalWallet",
+    "managedProcessSettings": "ogg:managedProcessSettings:Default",
+    "config": [
+      "REPLICAT RT",
+      "USERIDALIAS trgCred DOMAIN OracleGoldenGate",
+      "ALLOWNOOPUPDATES",
+	"",
+	"DBOPTIONS ENABLE_INSTANTIATION_FILTERING",
+	"",
+	"DDLERROR DEFAULT ABEND",
+	"",
+	"REPERROR (DEFAULT,RETRYOP MAXRETRIES 1)",
+	"REPERROR (26960, DISCARD)",
+	"REPERROR (PROCEDURE, DISCARD)",
+	"",
+	"DDL           INCLUDE MAPPED",
+	"DDLOPTIONS REPORT",
+	"",
+	"REPORTCOUNT EVERY 15 MINUTES, RATE",
+	"",
+	"MAPINVISIBLECOLUMNS",
+	"",
+	"MAP '$SRC_SCHEMA'.*, TARGET '$TRG_SCHEMA'.*;"
+    ],
+    "source": {
+      "name": "ES"
+    },
+    "checkpoint": {
+      "table": "GGADMIN.CHECKPOINTS"
+    },
+    "mode": {
+      "type": "nonintegrated",
+      "parallel": false
+    }
+   }'
+done
+echo " "	 
 echo "starting target replicat"
 curl -X PATCH $GG_URL/services/v2/replicats/RT \
        --user $GG_USER:$GG_PWD   \
        --insecure \
        -H 'Cache-Control: no-cache' \
        -d '{"status": "running"}' 
+while [ $? == "7" ]; do  
+echo "RETRY - starting target replicat"
+curl -X PATCH $GG_URL/services/v2/replicats/RT \
+       --user $GG_USER:$GG_PWD   \
+       --insecure \
+       -H 'Cache-Control: no-cache' \
+       -d '{"status": "running"}' 
+done
