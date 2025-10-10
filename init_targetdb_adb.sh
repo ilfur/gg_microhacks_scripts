@@ -11,7 +11,7 @@
 export TNS_ADMIN=~
 export TRG_URL=$(echo $TRG_URL|tr -d ' ')
 
-echo "ADP='$TRG_URL'" >> $TNS_ADMIN/tnsnames.ora
+echo "ADP=$TRG_URL" >> $TNS_ADMIN/tnsnames.ora
 cat $TNS_ADMIN/tnsnames.ora
 
 sqlplus admin/$TRG_ADMIN_PWD@ADP <<EOF
