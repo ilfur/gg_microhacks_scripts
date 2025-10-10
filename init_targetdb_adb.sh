@@ -19,15 +19,15 @@ ALTER USER GGADMIN IDENTIFIED BY $TRG_PWD ACCOUNT UNLOCK;
 BEGIN
   DBMS_CLOUD.CREATE_CREDENTIAL(
     credential_name => 'LOAD_CREDENTIAL',
-    username => 'frul1g8cgfam/oracleidentitycloudservice/marcel.pfeifer@oracle.com',
-    password => 'xMQ_Gb[f4peZ(i[2kI;]'  );
+    username => 'DUMMY',
+    password => 'DUMMY'  );
 END;
 /
 DECLARE
     exported_schema VARCHAR2(64)  := '$SRC_SCHEMA';
     import_schema   VARCHAR2(64)  := '$TRG_SCHEMA'; 
     data_pump_dir   VARCHAR2(64)  := 'DATA_PUMP_DIR';
-    dump_file_name  VARCHAR2(256) := 'https://objectstorage.eu-frankfurt-1.oraclecloud.com/p/peq5JVouDUrhcYFEzQ8GCznr4PBcuQzgCG1a9NBnLeip6Z9qiD6x77bdfnO0e0er/n/frul1g8cgfam/b/hr-sh-sample-data/o/sh.dmp';
+    dump_file_name  VARCHAR2(256) := 'https://objectstorage.eu-frankfurt-1.oraclecloud.com/p/G8mCAFoKUHHAg01q9_x7Uwr7JqVxT1C7xZ9gTGzyu2xAiIWe7q1e20UasXTsEb5a/n/fre3ftc1iva4/b/samples/o/sh.dmp';
     credential_name VARCHAR2(64)  := 'LOAD_CREDENTIAL';
     parallel        NUMBER        := 4;
  
