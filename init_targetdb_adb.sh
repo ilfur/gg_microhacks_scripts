@@ -7,6 +7,7 @@
 ## SRC_SCHEMA - schema to be synced in source database, like HR
 ## TRG_SCHEMA - schema to be synced in target database, like HR2
 ## TRG_ADMIN_PWD  - password of target ADB admin user
+## DUMP_FILE  - URL to a pre-authenticated dump file in blob store/object store to be loaded by data pump
 
 export TNS_ADMIN=~
 export TRG_URL=$(echo $TRG_URL|tr -d ' ')
@@ -33,7 +34,7 @@ DECLARE
     import_schema   VARCHAR2(64)  := '$TRG_SCHEMA'; 
     data_pump_dir   VARCHAR2(64)  := 'DATA_PUMP_DIR';
     --dump_file_name  VARCHAR2(256) := 'https://objectstorage.eu-frankfurt-1.oraclecloud.com/p/G8mCAFoKUHHAg01q9_x7Uwr7JqVxT1C7xZ9gTGzyu2xAiIWe7q1e20UasXTsEb5a/n/fre3ftc1iva4/b/samples/o/sh.dmp';
-    dump_file_name  VARCHAR2(256) := 'https://objectstorage.eu-frankfurt-1.oraclecloud.com/p/AchwripxZjs7IxMRtWO2H_gkxFHU4d2uNDYKctfGmgsRodlHvaxxgjAKT0awXOxH/n/fre3ftc1iva4/b/export_bucket/o/SHBIG.dmp';
+    dump_file_name  VARCHAR2(256) := '$DUMP_FILE';
     credential_name VARCHAR2(64)  := 'LOAD_CREDENTIAL';
     parallel        NUMBER        := 4;
  
