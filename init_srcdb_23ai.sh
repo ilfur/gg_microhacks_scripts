@@ -21,6 +21,7 @@ BEGIN
                        principal_name => 'SH',
                        principal_type => xs_acl.ptype_db));
 END;
+/
 EOF
 
 # Now, as user SH, download the DMP file (system is not allowed to do that)
@@ -64,6 +65,7 @@ DECLARE
     
       RAISE;
   END;
+/
 EOF
 
 # as system user, load the dmp file
@@ -92,6 +94,7 @@ BEGIN
     output_message := 'Data Pump Import Execution: ''' || job_status || '''';
     dbms_output.put_line(output_message);
 END;
+/
 EOF
 
 #configure goldengate replication params
