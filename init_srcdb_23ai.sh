@@ -24,7 +24,7 @@ END;
 EOF
 
 # Now, as user SH, download the DMP file (system is not allowed to do that)
-sqlplus SH/Welcome1234#@//SRC_URL <<EOF
+sqlplus SH/Welcome1234#@//$SRC_URL <<EOF
 create or replace directory load_dir as '/tmp';
 DECLARE
   lv_url    VARCHAR2(250) := 'https://objectstorage.eu-frankfurt-1.oraclecloud.com/p/AchwripxZjs7IxMRtWO2H_gkxFHU4d2uNDYKctfGmgsRodlHvaxxgjAKT0awXOxH/n/fre3ftc1iva4/b/export_bucket/o/SHBIG.dmp';
