@@ -11,7 +11,7 @@
 sqlplus SYSTEM/$SRC_ADMIN_PWD@//$SRC_URL <<EOF
 create user sh identified by Welcome1234#
    default tablespace users
-   temporary datbespace temp
+   temporary tablespace temp
    quota unlimited on users;
 grant connect, resource, create any directory to sh;
 BEGIN
