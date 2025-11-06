@@ -367,7 +367,7 @@ curl -X POST \
     "begin": "now",
     "managedProcessSettings": "ogg:managedProcessSettings:Default",
     "encryptionProfile": "LocalWallet",
-    "source": "tranlogs",
+	"source":{"tranlogs":"integrated"},
     "registration": {
         "share": true
     },
