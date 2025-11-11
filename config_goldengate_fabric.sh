@@ -141,8 +141,74 @@ done
 echo " "	 
 echo "creating fabric replicat"
 echo " "	 
+curl -X POST \
+       $GG_PROTOCOL://$GGFAB_URL/services/v2/replicats/FABRIC \
+       --user $GG_USER:$GG_PWD   \
+       --insecure \
+       -H 'Cache-Control: no-cache' \
+       -d '{
+    "$schema": "ogg:replicat",
+		"begin": {
+			"sequence": 0,
+			"offset": 0
+		},
+		"encryptionProfile": "LocalWallet",
+		"managedProcessSettings": "ogg:managedProcessSettings:Default",
+		"config": [
+			"REPLICAT FABRIC",
+			"MAP *.*, TARGET *.*;",
+			""
+		],
+		"source": {
+			"name": "ET"
+		},
+		"checkpoint": {
+			"table": ""
+		},
+		"registration": "none",
+		"mode": {
+			"type": "nonintegrated",
+			"parallel": false
+		}
+   }'
+
+while [ $? == "7" ]; do
+echo " "	 
+echo "RETRY - creating fabric replicat"
+curl -X POST \
+       $GG_PROTOCOL://$GGFAB_URL/services/v2/replicats/FABRIC \
+       --user $GG_USER:$GG_PWD   \
+       --insecure \
+       -H 'Cache-Control: no-cache' \
+       -d '{
+    "$schema": "ogg:replicat",
+		"begin": {
+			"sequence": 0,
+			"offset": 0
+		},
+		"encryptionProfile": "LocalWallet",
+		"managedProcessSettings": "ogg:managedProcessSettings:Default",
+		"config": [
+			"REPLICAT FABRIC",
+			"MAP *.*, TARGET *.*;",
+			""
+		],
+		"source": {
+			"name": "ET"
+		},
+		"checkpoint": {
+			"table": ""
+		},
+		"registration": "none",
+		"mode": {
+			"type": "nonintegrated",
+			"parallel": false
+		}
+   }'
+done
+
 echo "starting fabric replicat"
-curl -X PATCH $GGFAB_URL/services/v2/replicats/ET \
+curl -X PATCH $GG_PROTOCOL://$GGFAB_URL/services/v2/replicats/FABRIC \
        --user $GG_USER:$GG_PWD   \
        --insecure \
        -H 'Cache-Control: no-cache' \
@@ -150,7 +216,7 @@ curl -X PATCH $GGFAB_URL/services/v2/replicats/ET \
        
 while [ $? == "7" ]; do  
 echo "RETRY - starting fabric replicat"
-curl -X PATCH $GGFAB_URL/services/v2/replicats/RS \
+curl -X PATCH $GG_PROTOCOL://$GGFAB_URL/services/v2/replicats/FABRIC \
        --user $GG_USER:$GG_PWD   \
        --insecure \
        -H 'Cache-Control: no-cache' \
