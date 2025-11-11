@@ -33,9 +33,6 @@ curl -X POST \
 done
 echo " "	 
 echo "creating distribution path from GGoracle to GGfabric"
-
-echo " "	 
-echo "creating fabric replicat"
 curl -X POST \
        $GG_PROTOCOL://$GG_URL/services/v2/sources/gghack2ggfabric \
        --user $GG_USER:$GG_PWD   \
@@ -142,7 +139,9 @@ curl -X POST \
 }'
 done
 echo " "	 
-echo "starting distpath"
+echo "creating fabric replicat"
+echo " "	 
+echo "starting fabric replicat"
 curl -X PATCH $GGFAB_URL/services/v2/replicats/ET \
        --user $GG_USER:$GG_PWD   \
        --insecure \
@@ -150,7 +149,7 @@ curl -X PATCH $GGFAB_URL/services/v2/replicats/ET \
        -d '{"status": "running"}' 
        
 while [ $? == "7" ]; do  
-echo "RETRY - starting distpath"
+echo "RETRY - starting fabric replicat"
 curl -X PATCH $GGFAB_URL/services/v2/replicats/RS \
        --user $GG_USER:$GG_PWD   \
        --insecure \
