@@ -34,7 +34,7 @@ DECLARE
     exported_schema VARCHAR2(64)  := '$SRC_SCHEMA';
     import_schema   VARCHAR2(64)  := '$TRG_SCHEMA'; 
     data_pump_dir   VARCHAR2(64)  := 'DATA_PUMP_DIR';
-    --dump_file_name  VARCHAR2(256) := 'https://objectstorage.eu-frankfurt-1.oraclecloud.com/p/G8mCAFoKUHHAg01q9_x7Uwr7JqVxT1C7xZ9gTGzyu2xAiIWe7q1e20UasXTsEb5a/n/fre3ftc1iva4/b/samples/o/sh.dmp';
+    --dump_file_name  VARCHAR2(256) := 'https://objectstorage.eu-frankfurt-1.oraclecloud.com/p/MlPjh_7vFzaFTVOXUhZGCOWVCD1rmQz8nBxrUgkLTv70Z0feXgNm9kgtnEiR9n_I/n/fre3ftc1iva4/b/export_bucket/o/SHBIG.dmp';
     dump_file_name  VARCHAR2(256) := '$DUMP_FILE';
     credential_name VARCHAR2(64)  := 'LOAD_CREDENTIAL';
     parallel        NUMBER        := 4;
