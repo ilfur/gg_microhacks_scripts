@@ -1,20 +1,10 @@
 #/bin/bash
 ## Variables used:
 ## GG_URL     - GoldenGate (k8s internal) URL for REST API access
-## SRC_URL    - source database URL, like ggadmin@db23ai.oracle23ai:1521/FREEPDB1
-## TRG_URL    - target ADB URL, like ggadmin@(description=(retry_count=20)(retry_delay=3)(address=(protocol=tcps)(port=1521)(host=adb.eu-frankfurt-1.oraclecloud.com))(connect_data=(service_name=gfde677d3a923a9_atp23ai_low.adb.oraclecloud.com))(security=(ssl_server_dn_match=yes)))
-## SRC_PWD    - source database password for URL, like Welcome1234#
-## TRG_PWD    - target database password for URL, like Welcome1234#
-## SRC_USER   - source database user for goldengate
-## TRG_USER   - target database user for goldengate
+## GG_URL     - GoldenGate for MS Fabric (k8s internal) URL for REST API access
 ## GG_USER    - GoldenGate REST API username, like oggadmin
 ## GG_PWD     - GoldenGate REST API password, like Welcome1234#
-## SRC_SCHEMA - schema to be synced in source database, like SH
-## TRG_SCHEMA - schema to be synced in target database, like SH2
 
-##stripping empty spaces from connection string to be safe
-export TRG_URL=$(echo $TRG_URL|tr -d ' ')
-export SRC_URL=$(echo $SRC_URL|tr -d ' ')
 echo " "
 echo " "	 
 echo "Creating GG fabric credentials"
@@ -24,8 +14,8 @@ curl -X POST \
        --insecure \
        -H 'Cache-Control: no-cache' \
        -d '{
-         "userid":"'$TRG_USER'",
-         "password":"'$TRG_PWD'"
+         "userid":"'$GG_USER'",
+         "password":"'$GG_PWD'"
      }'
 while [ $? == "7" ]; do  
 echo "RETRY - Creating GG fabric credentials"
@@ -35,8 +25,8 @@ curl -X POST \
        --insecure \
        -H 'Cache-Control: no-cache' \
        -d '{
-         "userid":"'$TRG_USER'",
-         "password":"'$TRG_PWD'"
+         "userid":"'$GG_USER'",
+         "password":"'$GG_PWD'"
      }'
 done
 echo " "	 
