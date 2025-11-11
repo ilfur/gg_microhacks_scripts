@@ -28,7 +28,7 @@ EOF
 sqlplus SH/Welcome1234#@//$SRC_URL <<EOF
 create or replace directory load_dir as '/tmp';
 DECLARE
-  lv_url    VARCHAR2(250) := 'https://objectstorage.eu-frankfurt-1.oraclecloud.com/p/AchwripxZjs7IxMRtWO2H_gkxFHU4d2uNDYKctfGmgsRodlHvaxxgjAKT0awXOxH/n/fre3ftc1iva4/b/export_bucket/o/SHBIG.dmp';
+  lv_url    VARCHAR2(250) := 'https://objectstorage.eu-frankfurt-1.oraclecloud.com/p/MlPjh_7vFzaFTVOXUhZGCOWVCD1rmQz8nBxrUgkLTv70Z0feXgNm9kgtnEiR9n_I/n/fre3ftc1iva4/b/export_bucket/o/SHBIG.dmp';
   lc_return BLOB;
   lhttp_url httpuritype;
     ---Varriables declared for writing the LOB to pdf file --
