@@ -138,6 +138,23 @@ curl -X POST \
     "$schema": "ogg:distPath"
 }'
 done
+
+echo "starting distribution service"
+curl -X PATCH $GG_PROTOCOL://$GG_URL/services/v2/sources/gghack2ggfabric \
+       --user $GG_USER:$GG_PWD   \
+       --insecure \
+       -H 'Cache-Control: no-cache' \
+       -d '{"status": "running"}' 
+       
+while [ $? == "7" ]; do  
+echo "RETRY - starting fabric replicat"
+curl -X PATCH $GG_PROTOCOL://$GG_URL/services/v2/sources/gghack2ggfabric \
+       --user $GG_USER:$GG_PWD   \
+       --insecure \
+       -H 'Cache-Control: no-cache' \
+       -d '{"status": "running"}' 
+done
+
 echo " "	 
 echo "creating fabric replicat"
 echo " "	 
