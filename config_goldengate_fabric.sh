@@ -2,7 +2,7 @@
 ## Variables used:
 ## GG_URL     - GoldenGate (k8s internal) URL for REST API access, WITHOUT protocol but with port
 ## GG_PROTOCOL- GoldenGate server protocol, http or https
-## GG_URL     - GoldenGate for MS Fabric (k8s internal) URL for REST API access
+## GGFAB_URL     - GoldenGate for MS Fabric (k8s internal) URL for REST API access
 ## GG_USER    - GoldenGate REST API username, like oggadmin
 ## GG_PWD     - GoldenGate REST API password, like Welcome1234#
 ## GG_DEPL    - GoldenGate deployment name
