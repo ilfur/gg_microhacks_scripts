@@ -178,9 +178,6 @@ curl -X POST \
 		"source": {
 			"name": "ET"
 		},
-		"checkpoint": {
-			"table": ""
-		},
 		"registration": "none",
 		"mode": {
 			"type": "nonintegrated",
@@ -211,9 +208,6 @@ curl -X POST \
 		],
 		"source": {
 			"name": "ET"
-		},
-		"checkpoint": {
-			"table": ""
 		},
 		"registration": "none",
 		"mode": {
