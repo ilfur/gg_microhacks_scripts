@@ -6,8 +6,7 @@
 ## GG_USER    - GoldenGate REST API username, like oggadmin
 ## GG_PWD     - GoldenGate REST API password, like Welcome1234#
 ## GG_DEPL    - GoldenGate deployment name
-export GG_PROTOCOL=http
-echo " "
+
 echo " "	 
 echo "Creating GG fabric credentials"
 curl -X POST \
