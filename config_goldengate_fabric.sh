@@ -1,5 +1,6 @@
 #/bin/bash
 ## Variables used:
+## HACK_USER  - user01, user02,... some unique short name to separate data in the fabric env
 ## GG_URL     - GoldenGate (k8s internal) URL for REST API access, WITHOUT protocol but with port
 ## GG_PROTOCOL- GoldenGate server protocol, http or https
 ## GGFAB_URL     - GoldenGate for MS Fabric (k8s internal) URL for REST API access
@@ -274,7 +275,7 @@ curl -X POST \
 "#TODO: Edit the proxy configuration.",
 "#jvm.bootoptions=-Dhttps.proxyHost=some-proxy-address.com -Dhttps.proxyPort=80 -Djava.net.useSystemProxies=true",
 "#Mapping Parameters to create files and directories",
-"gg.eventhandler.onelake.pathMappingTemplate=${catalogname}.lakehouse/Files/ogg/${groupName}/${schemaname}.schema/${tablename}"
+"gg.eventhandler.onelake.pathMappingTemplate=${catalogname}.lakehouse/Files/ogg/'$HACK_USER'/${groupName}/${schemaname}.schema/${tablename}"
 ],
 "$schema": "ogg:config"
 }'
