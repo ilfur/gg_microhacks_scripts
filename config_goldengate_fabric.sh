@@ -146,7 +146,7 @@ curl -X PATCH $GG_PROTOCOL://$GG_URL/services/v2/sources/gghack2ggfabric \
        -d '{"status": "running"}' 
        
 while [ $? == "7" ]; do  
-echo "RETRY - starting fabric replicat"
+echo "RETRY - starting distribution service"
 curl -X PATCH $GG_PROTOCOL://$GG_URL/services/v2/sources/gghack2ggfabric \
        --user $GG_USER:$GG_PWD   \
        --insecure \
@@ -223,18 +223,18 @@ curl -X POST \
    }'
 done
 
-echo "starting fabric replicat"
-curl -X PATCH $GG_PROTOCOL://$GGFAB_URL/services/v2/replicats/FABRIC \
-       --user $GG_USER:$GG_PWD   \
-       --insecure \
-       -H 'Cache-Control: no-cache' \
-       -d '{"status": "running"}' 
-       
-while [ $? == "7" ]; do  
-echo "RETRY - starting fabric replicat"
-curl -X PATCH $GG_PROTOCOL://$GGFAB_URL/services/v2/replicats/FABRIC \
-       --user $GG_USER:$GG_PWD   \
-       --insecure \
-       -H 'Cache-Control: no-cache' \
-       -d '{"status": "running"}' 
-done
+#echo "starting fabric replicat"
+#curl -X PATCH $GG_PROTOCOL://$GGFAB_URL/services/v2/replicats/FABRIC \
+#       --user $GG_USER:$GG_PWD   \
+#       --insecure \
+#       -H 'Cache-Control: no-cache' \
+#       -d '{"status": "running"}' 
+#       
+#while [ $? == "7" ]; do  
+#echo "RETRY - starting fabric replicat"
+#curl -X PATCH $GG_PROTOCOL://$GGFAB_URL/services/v2/replicats/FABRIC \
+#       --user $GG_USER:$GG_PWD   \
+#       --insecure \
+#       -H 'Cache-Control: no-cache' \
+#       -d '{"status": "running"}' 
+#done
