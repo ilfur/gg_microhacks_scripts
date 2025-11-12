@@ -1,6 +1,7 @@
 #/bin/bash
 ## Variables used:
-## GG_URL     - GoldenGate (k8s internal) URL for REST API access
+## GG_URL     - GoldenGate (k8s internal) URL for REST API access WITHOUT protocol, but with port
+## GG_PROTOCOL - http or https
 ## SRC_URL    - source database URL, like ggadmin@db23ai.oracle23ai:1521/FREEPDB1
 ## TRG_URL    - target ADB URL, like ggadmin@(description=(retry_count=20)(retry_delay=3)(address=(protocol=tcps)(port=1521)(host=adb.eu-frankfurt-1.oraclecloud.com))(connect_data=(service_name=gfde677d3a923a9_atp23ai_low.adb.oraclecloud.com))(security=(ssl_server_dn_match=yes)))
 ## SRC_PWD    - source database password for URL, like Welcome1234#
@@ -18,7 +19,7 @@ export SRC_URL=$(echo $SRC_URL|tr -d ' ')
 echo " "
 echo "Creating source credentials"
 curl -X POST \
-       $GG_URL/services/v2/credentials/OracleGoldenGate/srcCred \
+       $GG_PROTOCOL://$GG_URL/services/v2/credentials/OracleGoldenGate/srcCred \
        --user $GG_USER:$GG_PWD   \
        --insecure \
        -H 'Cache-Control: no-cache' \
@@ -29,7 +30,7 @@ curl -X POST \
 while [ $? == "7" ]; do  
   echo "RETRY - Creating source credentials"
   curl -X POST \
-       $GG_URL/services/v2/credentials/OracleGoldenGate/srcCred \
+       $GG_PROTOCOL://$GG_URL/services/v2/credentials/OracleGoldenGate/srcCred \
        --user $GG_USER:$GG_PWD   \
        --insecure \
        -H 'Cache-Control: no-cache' \
@@ -41,7 +42,7 @@ done
 echo " "	 
 echo "Creating target credentials"
 curl -X POST \
-       $GG_URL/services/v2/credentials/OracleGoldenGate/trgCred \
+       $GG_PROTOCOL://$GG_URL/services/v2/credentials/OracleGoldenGate/trgCred \
        --user $GG_USER:$GG_PWD   \
        --insecure \
        -H 'Cache-Control: no-cache' \
@@ -52,7 +53,7 @@ curl -X POST \
 while [ $? == "7" ]; do  
 echo "RETRY - Creating target credentials"
 curl -X POST \
-       $GG_URL/services/v2/credentials/OracleGoldenGate/trgCred \
+       $GG_PROTOCOL://$GG_URL/services/v2/credentials/OracleGoldenGate/trgCred \
        --user $GG_USER:$GG_PWD   \
        --insecure \
        -H 'Cache-Control: no-cache' \
@@ -64,7 +65,7 @@ done
 echo " "	 
 echo "Creating source connection"
 curl -X POST \
-       $GG_URL/services/v2/connections/srcConn \
+       $GG_PROTOCOL://$GG_URL/services/v2/connections/srcConn \
        --user $GG_USER:$GG_PWD   \
        --insecure \
        -H 'Cache-Control: no-cache' \
@@ -76,7 +77,7 @@ curl -X POST \
 while [ $? == "7" ]; do  
 echo "RETRY - Creating source connection"
 curl -X POST \
-       $GG_URL/services/v2/connections/srcConn \
+       $GG_PROTOCOL://$GG_URL/services/v2/connections/srcConn \
        --user $GG_USER:$GG_PWD   \
        --insecure \
        -H 'Cache-Control: no-cache' \
@@ -89,7 +90,7 @@ done
 echo " "	 
 echo "Creating target connection"
 curl -X POST \
-       $GG_URL/services/v2/connections/trgConn \
+       $GG_PROTOCOL://$GG_URL/services/v2/connections/trgConn \
        --user $GG_USER:$GG_PWD   \
        --insecure \
        -H 'Cache-Control: no-cache' \
@@ -101,7 +102,7 @@ curl -X POST \
 while [ $? == "7" ]; do  
 echo "RETRY - Creating target connection"
 curl -X POST \
-       $GG_URL/services/v2/connections/trgConn \
+       $GG_PROTOCOL://$GG_URL/services/v2/connections/trgConn \
        --user $GG_USER:$GG_PWD   \
        --insecure \
        -H 'Cache-Control: no-cache' \
@@ -114,7 +115,7 @@ done
 echo " "	 
 echo "Creating target heartbeat"
 curl -X POST \
-       $GG_URL/services/v2/connections/trgConn/tables/heartbeat \
+       $GG_PROTOCOL://$GG_URL/services/v2/connections/trgConn/tables/heartbeat \
        --user $GG_USER:$GG_PWD   \
        --insecure \
        -H 'Cache-Control: no-cache' \
@@ -122,7 +123,7 @@ curl -X POST \
 while [ $? == "7" ]; do  
 echo "RETRY - Creating target heartbeat"
 curl -X POST \
-       $GG_URL/services/v2/connections/trgConn/tables/heartbeat \
+       $GG_PROTOCOL://$GG_URL/services/v2/connections/trgConn/tables/heartbeat \
        --user $GG_USER:$GG_PWD   \
        --insecure \
        -H 'Cache-Control: no-cache' \
@@ -131,7 +132,7 @@ done
 echo " "	 
 echo "Creating source heartbeat"
 curl -X POST \
-       $GG_URL/services/v2/connections/srcConn/tables/heartbeat \
+       $GG_PROTOCOL://$GG_URL/services/v2/connections/srcConn/tables/heartbeat \
        --user $GG_USER:$GG_PWD   \
        --insecure \
        -H 'Cache-Control: no-cache' \
@@ -139,7 +140,7 @@ curl -X POST \
 while [ $? == "7" ]; do  
 echo "RETRY - Creating source heartbeat"
 curl -X POST \
-       $GG_URL/services/v2/connections/srcConn/tables/heartbeat \
+       $GG_PROTOCOL://$GG_URL/services/v2/connections/srcConn/tables/heartbeat \
        --user $GG_USER:$GG_PWD   \
        --insecure \
        -H 'Cache-Control: no-cache' \
@@ -148,7 +149,7 @@ done
 echo " "	 
 echo "Creating source checkpoint"
 curl -X POST \
-       $GG_URL/services/v2/connections/srcConn/tables/checkpoint \
+       $GG_PROTOCOL://$GG_URL/services/v2/connections/srcConn/tables/checkpoint \
        --user $GG_USER:$GG_PWD   \
        --insecure \
        -H 'Cache-Control: no-cache' \
@@ -159,7 +160,7 @@ curl -X POST \
 while [ $? == "7" ]; do  
 echo "RETRY - Creating source checkpoint"
 curl -X POST \
-       $GG_URL/services/v2/connections/srcConn/tables/checkpoint \
+       $GG_PROTOCOL://$GG_URL/services/v2/connections/srcConn/tables/checkpoint \
        --user $GG_USER:$GG_PWD   \
        --insecure \
        -H 'Cache-Control: no-cache' \
@@ -171,7 +172,7 @@ done
 echo " "	 
 echo "Creating target checkpoint"
 curl -X POST \
-       $GG_URL/services/v2/connections/trgConn/tables/checkpoint \
+       $GG_PROTOCOL://$GG_URL/services/v2/connections/trgConn/tables/checkpoint \
        --user $GG_USER:$GG_PWD   \
        --insecure \
        -H 'Cache-Control: no-cache' \
@@ -182,7 +183,7 @@ curl -X POST \
 while [ $? == "7" ]; do  
 echo "RETRY - Creating target checkpoint"
 curl -X POST \
-       $GG_URL/services/v2/connections/trgConn/tables/checkpoint \
+       $GG_PROTOCOL://$GG_URL/services/v2/connections/trgConn/tables/checkpoint \
        --user $GG_USER:$GG_PWD   \
        --insecure \
        -H 'Cache-Control: no-cache' \
@@ -194,7 +195,7 @@ done
 echo " "	 
 echo "Creating source trandata for schema $SRC_SCHEMA"
 curl -X POST \
-       $GG_URL/services/v2/connections/srcConn/trandata/schema \
+       $GG_PROTOCOL://$GG_URL/services/v2/connections/srcConn/trandata/schema \
        --user $GG_USER:$GG_PWD   \
        --insecure \
        -H 'Cache-Control: no-cache' \
@@ -205,7 +206,7 @@ curl -X POST \
 while [ $? == "7" ]; do  
 echo "RETRY - Creating source trandata for schema $SRC_SCHEMA"
 curl -X POST \
-       $GG_URL/services/v2/connections/srcConn/trandata/schema \
+       $GG_PROTOCOL://$GG_URL/services/v2/connections/srcConn/trandata/schema \
        --user $GG_USER:$GG_PWD   \
        --insecure \
        -H 'Cache-Control: no-cache' \
@@ -217,7 +218,7 @@ done
 echo " "	 
 echo "Creating target trandata for schema $TRG_SCHEMA"
 curl -X POST \
-       $GG_URL/services/v2/connections/trgConn/trandata/schema \
+       $GG_PROTOCOL://$GG_URL/services/v2/connections/trgConn/trandata/schema \
        --user $GG_USER:$GG_PWD   \
        --insecure \
        -H 'Cache-Control: no-cache' \
@@ -228,7 +229,7 @@ curl -X POST \
 while [ $? == "7" ]; do  
 echo "RETRY - Creating target trandata for schema $TRG_SCHEMA"
 curl -X POST \
-       $GG_URL/services/v2/connections/trgConn/trandata/schema \
+       $GG_PROTOCOL://$GG_URL/services/v2/connections/trgConn/trandata/schema \
        --user $GG_USER:$GG_PWD   \
        --insecure \
        -H 'Cache-Control: no-cache' \
@@ -240,7 +241,7 @@ done
 echo " "	 
 echo "Creating source extract"
 curl -X POST \
-       $GG_URL/services/v2/extracts/ES \
+       $GG_PROTOCOL://$GG_URL/services/v2/extracts/ES \
        --user $GG_USER:$GG_PWD   \
        --insecure \
        -H 'Cache-Control: no-cache' \
@@ -289,7 +290,7 @@ curl -X POST \
 while [ $? == "7" ]; do  
 echo "RETRY - Creating source extract"
 curl -X POST \
-       $GG_URL/services/v2/extracts/ES \
+       $GG_PROTOCOL://$GG_URL/services/v2/extracts/ES \
        --user $GG_USER:$GG_PWD   \
        --insecure \
        -H 'Cache-Control: no-cache' \
@@ -338,14 +339,14 @@ curl -X POST \
 done
 echo " "	 
 echo "starting source extract"
-curl -X PATCH $GG_URL/services/v2/extracts/ES \
+curl -X PATCH $GG_PROTOCOL://$GG_URL/services/v2/extracts/ES \
        --user $GG_USER:$GG_PWD   \
        --insecure \
        -H 'Cache-Control: no-cache' \
        -d '{"status": "running"}' 
 while [ $? == "7" ]; do  
 echo "RETRY - starting source extract"
-curl -X PATCH $GG_URL/services/v2/extracts/ES \
+curl -X PATCH $GG_PROTOCOL://$GG_URL/services/v2/extracts/ES \
        --user $GG_USER:$GG_PWD   \
        --insecure \
        -H 'Cache-Control: no-cache' \
@@ -354,7 +355,7 @@ done
 echo " "	 
 echo "creating target extract"       
 curl -X POST \
-       $GG_URL/services/v2/extracts/ET \
+       $GG_PROTOCOL://$GG_URL/services/v2/extracts/ET \
        --user $GG_USER:$GG_PWD   \
        --insecure \
        -H 'Cache-Control: no-cache' \
@@ -402,7 +403,7 @@ curl -X POST \
 while [ $? == "7" ]; do  
 echo "RETRY - creating target extract"       
 curl -X POST \
-       $GG_URL/services/v2/extracts/ET \
+       $GG_PROTOCOL://$GG_URL/services/v2/extracts/ET \
        --user $GG_USER:$GG_PWD   \
        --insecure \
        -H 'Cache-Control: no-cache' \
@@ -450,7 +451,7 @@ curl -X POST \
 done
 echo " "	 
 echo "starting target extract"
-curl -X PATCH $GG_URL/services/v2/extracts/ET \
+curl -X PATCH $GG_PROTOCOL://$GG_URL/services/v2/extracts/ET \
        --user $GG_USER:$GG_PWD   \
        --insecure \
        -H 'Cache-Control: no-cache' \
@@ -458,7 +459,7 @@ curl -X PATCH $GG_URL/services/v2/extracts/ET \
 	   
 while [ $? == "7" ]; do  
 echo "RETRY - starting target extract"
-curl -X PATCH $GG_URL/services/v2/extracts/ET \
+curl -X PATCH $GG_PROTOCOL://$GG_URL/services/v2/extracts/ET \
        --user $GG_USER:$GG_PWD   \
        --insecure \
        -H 'Cache-Control: no-cache' \
@@ -467,7 +468,7 @@ done
 echo " "	 
 echo "creating source replicat"
 curl -X POST \
-       $GG_URL/services/v2/replicats/RS \
+       $GG_PROTOCOL://$GG_URL/services/v2/replicats/RS \
        --user $GG_USER:$GG_PWD   \
        --insecure \
        -H 'Cache-Control: no-cache' \
@@ -516,7 +517,7 @@ curl -X POST \
 while [ $? == "7" ]; do  
 echo "RETRY - creating source replicat"
 curl -X POST \
-       $GG_URL/services/v2/replicats/RS \
+       $GG_PROTOCOL://$GG_URL/services/v2/replicats/RS \
        --user $GG_USER:$GG_PWD   \
        --insecure \
        -H 'Cache-Control: no-cache' \
@@ -564,7 +565,7 @@ curl -X POST \
 done
 echo " "	 
 echo "starting source replicat"
-curl -X PATCH $GG_URL/services/v2/replicats/RS \
+curl -X PATCH $GG_PROTOCOL://$GG_URL/services/v2/replicats/RS \
        --user $GG_USER:$GG_PWD   \
        --insecure \
        -H 'Cache-Control: no-cache' \
@@ -572,7 +573,7 @@ curl -X PATCH $GG_URL/services/v2/replicats/RS \
        
 while [ $? == "7" ]; do  
 echo "RETRY - starting source replicat"
-curl -X PATCH $GG_URL/services/v2/replicats/RS \
+curl -X PATCH $GG_PROTOCOL://$GG_URL/services/v2/replicats/RS \
        --user $GG_USER:$GG_PWD   \
        --insecure \
        -H 'Cache-Control: no-cache' \
@@ -581,7 +582,7 @@ done
 echo " "	 
 echo "creating target replicat"
 curl -X POST \
-       $GG_URL/services/v2/replicats/RT \
+       $GG_PROTOCOL://$GG_URL/services/v2/replicats/RT \
        --user $GG_USER:$GG_PWD   \
        --insecure \
        -H 'Cache-Control: no-cache' \
@@ -629,7 +630,7 @@ curl -X POST \
 while [ $? == "7" ]; do  
 echo "RETRY - creating target replicat"
 curl -X POST \
-       $GG_URL/services/v2/replicats/RT \
+       $GG_PROTOCOL://$GG_URL/services/v2/replicats/RT \
        --user $GG_USER:$GG_PWD   \
        --insecure \
        -H 'Cache-Control: no-cache' \
@@ -677,14 +678,14 @@ curl -X POST \
 done
 echo " "	 
 echo "starting target replicat"
-curl -X PATCH $GG_URL/services/v2/replicats/RT \
+curl -X PATCH $GG_PROTOCOL://$GG_URL/services/v2/replicats/RT \
        --user $GG_USER:$GG_PWD   \
        --insecure \
        -H 'Cache-Control: no-cache' \
        -d '{"status": "running"}' 
 while [ $? == "7" ]; do  
 echo "RETRY - starting target replicat"
-curl -X PATCH $GG_URL/services/v2/replicats/RT \
+curl -X PATCH $GG_PROTOCOL://$GG_URL/services/v2/replicats/RT \
        --user $GG_USER:$GG_PWD   \
        --insecure \
        -H 'Cache-Control: no-cache' \
