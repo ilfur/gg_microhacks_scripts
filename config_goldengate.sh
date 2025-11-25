@@ -500,7 +500,7 @@ curl -X POST \
 	"",
 	"MAPINVISIBLECOLUMNS",
 	"",
-	"MAP '$TRG_SCHEMA'.*, TARGET '$SRC_SCHEMA'.*;"
+	"MAP '$SRC_SCHEMA'.*, TARGET '$TRG_SCHEMA'.*;"
     ],
     "source": {
       "name": "ET"
@@ -549,7 +549,7 @@ curl -X POST \
 	"",
 	"MAPINVISIBLECOLUMNS",
 	"",
-	"MAP '$TRG_SCHEMA'.*, TARGET '$SRC_SCHEMA'.*;"
+	"MAP '$SRC_SCHEMA'.*, TARGET '$TRG_SCHEMA'.*;"
     ],
     "source": {
       "name": "ET"
