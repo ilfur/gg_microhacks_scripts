@@ -243,7 +243,7 @@ curl -X POST \
 "#TODO: Edit the proxy configuration.",
 "#jvm.bootoptions=-Dhttps.proxyHost=some-proxy-address.com -Dhttps.proxyPort=80 -Djava.net.useSystemProxies=true",
 "#Mapping Parameters to create files and directories",
-"gg.eventhandler.onelake.pathMappingTemplate=${catalogname}.lakehouse/Files/ogg/${groupName}/${schemaname}.schema/${tablename}"
+"gg.eventhandler.onelake.pathMappingTemplate=${catalogname}.lakehouse/Files/ogg/'$HACK_USER'/${groupName}/${schemaname}.schema/${tablename}"
 ],
 "$schema": "ogg:config"
 }'
